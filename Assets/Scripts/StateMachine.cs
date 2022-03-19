@@ -1,14 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
+[RequireComponent(typeof(Rigidbody), typeof(NavMeshAgent))]
 public class StateMachine : MonoBehaviour
 {
     public NPCStats stats;
     private BaseState currentState;
 
+    [HideInInspector]
+    public Vector3 position;
+    [HideInInspector]
+    public GameObject target;
+    [HideInInspector]
+    public NavMeshAgent agent;
+
+    private void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+    }
     private void Start()
     {
+        currentState = GetInitialState();
+
         if (currentState != null)
             currentState.Enter();
     }
@@ -31,5 +46,10 @@ public class StateMachine : MonoBehaviour
 
         currentState = _newState;
         currentState.Enter();
+    }
+
+    public virtual BaseState GetInitialState()
+    {
+        return null;
     }
 }
