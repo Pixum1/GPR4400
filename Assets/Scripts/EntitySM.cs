@@ -7,19 +7,41 @@ public class EntitySM : StateMachine
     [HideInInspector]
     public Idle idleState;
     [HideInInspector]
-    public Patrol patrolState;
+    public Roaming roamingState;
     [HideInInspector]
-    public Follow followState;
+    public Following followingState;
     [HideInInspector]
-    public Attack attackState;
+    public Attacking attackingState;
 
-
-    private void Awake()
+    public override void Awake()
     {
+        base.Awake();
+
+        stats.runTimeSight = stats.sightRadius;
+        stats.runTimeMoveSpeed = stats.moveSpeed;
+
         idleState = new Idle(this);
-        patrolState = new Patrol(this);
-        attackState = new Attack(this);
-        followState = new Follow(this);
+        roamingState = new Roaming(this);
+        attackingState = new Attacking(this);
+        followingState = new Following(this);
+    }
+
+    public override void Update()
+    {
+        base.Update();
+
+        agent.speed = stats.runTimeMoveSpeed;
+
+        //-- Set target if enemies in range and has no target
+        if (GetEnemies(stats.runTimeSight).Length > 0)
+            target = GetEnemies(stats.runTimeSight)[0].transform.gameObject;
+        else if (GetEnemies(stats.runTimeSight).Length == 0)
+            target = null;
+    }
+
+    public RaycastHit[] GetEnemies(float _radius)
+    {
+        return Physics.SphereCastAll(transform.position, _radius, Vector3.up, Mathf.Infinity, stats.enemyLayer);
     }
 
     public override BaseState GetInitialState()

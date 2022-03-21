@@ -7,20 +7,18 @@ using UnityEngine.AI;
 public class StateMachine : MonoBehaviour
 {
     public NPCStats stats;
-    private BaseState currentState;
+    protected BaseState currentState;
 
-    [HideInInspector]
-    public Vector3 position;
     [HideInInspector]
     public GameObject target;
     [HideInInspector]
     public NavMeshAgent agent;
 
-    private void Awake()
+    public virtual void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
     }
-    private void Start()
+    public virtual void Start()
     {
         currentState = GetInitialState();
 
@@ -28,13 +26,13 @@ public class StateMachine : MonoBehaviour
             currentState.Enter();
     }
 
-    private void Update()
+    public virtual void Update()
     {
-        if(currentState != null)
+        if (currentState != null)
             currentState.UpdateLogic();
     }
 
-    private void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         if(currentState != null)
             currentState.UpdatePhysics();
@@ -42,6 +40,7 @@ public class StateMachine : MonoBehaviour
 
     public void ChangeState(BaseState _newState)
     {
+        Debug.Log(_newState);
         currentState.Exit();
 
         currentState = _newState;
@@ -51,5 +50,20 @@ public class StateMachine : MonoBehaviour
     public virtual BaseState GetInitialState()
     {
         return null;
+    }
+
+    private void OnDrawGizmos()
+    {
+        //-- Sight Radius
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, stats.runTimeSight);
+
+        //-- Move Radius
+        Gizmos.color = Color.gray;
+        Gizmos.DrawWireSphere(transform.position, stats.moveRadius);
+
+        //-- Attack Radius
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, stats.attackRange);
     }
 }

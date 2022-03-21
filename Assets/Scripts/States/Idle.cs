@@ -6,7 +6,7 @@ public class Idle : BaseState
 {
     private EntitySM stateMachine;
 
-    public Idle(EntitySM _sm) : base("Idle", _sm) 
+    public Idle(EntitySM _sm) : base(_sm) 
     { 
         stateMachine = _sm;
     }
@@ -15,25 +15,26 @@ public class Idle : BaseState
     public override void Enter()
     {
         base.Enter();
+
+        stateMachine.target = null; //-> Reset target
+        stateMachine.stats.runTimeSight = stateMachine.stats.sightRadius; //-> Reset runtimeSight
+        stateMachine.stats.runTimeMoveSpeed = stateMachine.stats.moveSpeed; //-> Reset agent movespeed to normal value
     }
 
     public override void UpdateLogic()
     {
         base.UpdateLogic();
 
-        //If enemy is in sight
-        if (Physics.SphereCast(stateMachine.stats.startPosition, stateMachine.stats.sightRadius, Vector3.up, out RaycastHit hitInfo))
+        //-- reached initial position when coming from following state
+        if (stateMachine.agent.remainingDistance <= 0)
         {
-            if (hitInfo.transform.gameObject.layer == stateMachine.stats.enemies)
-            {
-                //Follow the enemy
-                stateMachine.ChangeState(stateMachine.followState);
-            }
-        }
-        else
-        {
-            //Return to patroling
-            stateMachine.ChangeState(stateMachine.patrolState);
+            //-- Has target
+            if (stateMachine.target != null)
+                stateMachine.ChangeState(stateMachine.followingState);
+
+            //-- Has no target
+            else
+                stateMachine.ChangeState(stateMachine.roamingState);
         }
     }
 
