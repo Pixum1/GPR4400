@@ -21,8 +21,8 @@ public class Following : BaseState
         initialPosition = stateMachine.transform.position;
 
         //-- Adjust Runtime values
-        stateMachine.stats.runTimeSight = stateMachine.stats.sightRadius * 2f;
-        stateMachine.stats.runTimeMoveSpeed = stateMachine.stats.moveSpeed * 2f;
+        stateMachine.runTimeSight = stateMachine.stats.sightRadius * 2f;
+        stateMachine.runTimeMoveSpeed = stateMachine.stats.moveSpeed * 2f;
     }
     public override void UpdateLogic()
     {

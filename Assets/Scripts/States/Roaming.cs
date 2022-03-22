@@ -16,7 +16,7 @@ public class Roaming : BaseState
         base.Enter();
 
         //-- Set path to random destination
-        stateMachine.agent.destination = new Vector3(stateMachine.stats.startPosition.x + Random.insideUnitCircle.x, 0, stateMachine.stats.startPosition.z + Random.insideUnitCircle.y) * stateMachine.stats.moveRadius;
+        stateMachine.agent.destination = new Vector3(stateMachine.startPosition.x + Random.insideUnitCircle.x, 0, stateMachine.startPosition.z + Random.insideUnitCircle.y) * stateMachine.stats.moveRadius;
     }
     public override void UpdateLogic()
     {

@@ -17,8 +17,8 @@ public class Idle : BaseState
         base.Enter();
 
         stateMachine.target = null; //-> Reset target
-        stateMachine.stats.runTimeSight = stateMachine.stats.sightRadius; //-> Reset runtimeSight
-        stateMachine.stats.runTimeMoveSpeed = stateMachine.stats.moveSpeed; //-> Reset agent movespeed to normal value
+        stateMachine.runTimeSight = stateMachine.stats.sightRadius; //-> Reset runtimeSight
+        stateMachine.runTimeMoveSpeed = stateMachine.stats.moveSpeed; //-> Reset agent movespeed to normal value
     }
 
     public override void UpdateLogic()

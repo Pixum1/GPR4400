@@ -5,18 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "new_NPC_Stats")]
 public class NPCStats : ScriptableObject
 {
-    [HideInInspector]
-    public Vector3 startPosition;
     public float moveSpeed;
     public float moveRadius;
     public float sightRadius;
     public float attackDamage;
     public float attackRange;
     public LayerMask enemyLayer;
-
-    [HideInInspector]
-    public float runTimeSight;
-    [HideInInspector]
-    public float runTimeMoveSpeed;
-
 }

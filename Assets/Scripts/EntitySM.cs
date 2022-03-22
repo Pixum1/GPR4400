@@ -13,12 +13,20 @@ public class EntitySM : StateMachine
     [HideInInspector]
     public Attacking attackingState;
 
+    
+    [HideInInspector]
+    public Vector3 startPosition;
+    [HideInInspector]
+    public float runTimeSight;
+    [HideInInspector]
+    public float runTimeMoveSpeed;
+
     public override void Awake()
     {
         base.Awake();
 
-        stats.runTimeSight = stats.sightRadius;
-        stats.runTimeMoveSpeed = stats.moveSpeed;
+        runTimeSight = stats.sightRadius;
+        runTimeMoveSpeed = stats.moveSpeed;
 
         idleState = new Idle(this);
         roamingState = new Roaming(this);
@@ -30,12 +38,12 @@ public class EntitySM : StateMachine
     {
         base.Update();
 
-        agent.speed = stats.runTimeMoveSpeed;
+        agent.speed = runTimeMoveSpeed;
 
         //-- Set target if enemies in range and has no target
-        if (GetEnemies(stats.runTimeSight).Length > 0)
-            target = GetEnemies(stats.runTimeSight)[0].transform.gameObject;
-        else if (GetEnemies(stats.runTimeSight).Length == 0)
+        if (GetEnemies(runTimeSight).Length > 0)
+            target = GetEnemies(runTimeSight)[0].transform.gameObject;
+        else if (GetEnemies(runTimeSight).Length == 0)
             target = null;
     }
 
@@ -47,5 +55,23 @@ public class EntitySM : StateMachine
     public override BaseState GetInitialState()
     {
         return idleState;
+    }
+
+    private void OnDrawGizmos()
+    {
+        //-- Sight Radius
+        Gizmos.color = Color.yellow;
+        if (runTimeSight > 0)
+            Gizmos.DrawWireSphere(transform.position, runTimeSight);
+        else
+            Gizmos.DrawWireSphere(transform.position, stats.sightRadius);
+
+        //-- Move Radius
+        Gizmos.color = Color.gray;
+        Gizmos.DrawWireSphere(transform.position, stats.moveRadius);
+
+        //-- Attack Radius
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, stats.attackRange);
     }
 }

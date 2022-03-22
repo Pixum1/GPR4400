@@ -51,19 +51,4 @@ public class StateMachine : MonoBehaviour
     {
         return null;
     }
-
-    private void OnDrawGizmos()
-    {
-        //-- Sight Radius
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, stats.runTimeSight);
-
-        //-- Move Radius
-        Gizmos.color = Color.gray;
-        Gizmos.DrawWireSphere(transform.position, stats.moveRadius);
-
-        //-- Attack Radius
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, stats.attackRange);
-    }
 }
