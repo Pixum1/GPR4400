@@ -5,6 +5,8 @@ using UnityEngine;
 public class Idle : BaseState
 {
     private EntitySM stateMachine;
+    public float idleTimer;
+    private float idleTime = Random.Range(1,4);
 
     public Idle(EntitySM _sm) : base(_sm) 
     { 
@@ -16,26 +18,17 @@ public class Idle : BaseState
     {
         base.Enter();
 
+        idleTimer = idleTime;
         stateMachine.target = null; //-> Reset target
-        stateMachine.runTimeSight = stateMachine.stats.sightRadius; //-> Reset runtimeSight
-        stateMachine.runTimeMoveSpeed = stateMachine.stats.moveSpeed; //-> Reset agent movespeed to normal value
+        stateMachine.sightRadius = stateMachine.stats.sightRadius; //-> Reset runtimeSight
+        stateMachine.moveSpeed = stateMachine.stats.moveSpeed; //-> Reset agent movespeed to normal value
     }
 
     public override void UpdateLogic()
     {
         base.UpdateLogic();
 
-        //-- reached initial position when coming from following state
-        if (stateMachine.agent.remainingDistance <= 0)
-        {
-            //-- Has target
-            if (stateMachine.target != null)
-                stateMachine.ChangeState(stateMachine.followingState);
-
-            //-- Has no target
-            else
-                stateMachine.ChangeState(stateMachine.roamingState);
-        }
+        idleTimer -= Time.deltaTime;
     }
 
     public override void UpdatePhysics()

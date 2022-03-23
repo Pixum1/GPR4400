@@ -13,13 +13,10 @@ MonoBehaviour:
   m_Name: Orc
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  moveRadius: 20
-  sightRadius: 10
+  moveRadius: 12.53
+  sightRadius: 7.2
   attackDamage: 5
   attackRange: 3
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
-  startPosition: {x: 0, y: 0, z: 0}
-  runTimeSight: 10
-  runTimeMoveSpeed: 5

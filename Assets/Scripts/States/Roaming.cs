@@ -16,23 +16,12 @@ public class Roaming : BaseState
         base.Enter();
 
         //-- Set path to random destination
-        stateMachine.agent.destination = new Vector3(stateMachine.startPosition.x + Random.insideUnitCircle.x, 0, stateMachine.startPosition.z + Random.insideUnitCircle.y) * stateMachine.stats.moveRadius;
+        Vector3 circle = Random.insideUnitSphere * stateMachine.stats.moveRadius;
+        stateMachine.agent.SetDestination(stateMachine.startPosition + circle);
     }
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-
-        //-- If has target
-        if(stateMachine.target != null)
-            stateMachine.ChangeState(stateMachine.followingState);
-
-        //-- If calculated path is not valid
-        if(stateMachine.agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathPartial)
-            stateMachine.ChangeState(stateMachine.idleState);
-
-        //-- If destination was reached
-        if (stateMachine.agent.remainingDistance == 0 && stateMachine.agent.path != null)
-            stateMachine.ChangeState(stateMachine.idleState);
     }
     public override void UpdatePhysics()
     {

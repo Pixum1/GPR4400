@@ -26,7 +26,7 @@ public class Boid : MonoBehaviour
 
     private void Update()
     {
-        speed = sm.runTimeMoveSpeed;
+        speed = sm.moveSpeed;
         neighbours = Physics.SphereCastAll(transform.position, settings.radius, Vector3.up, settings.boidGroup);
 
         Alignment();

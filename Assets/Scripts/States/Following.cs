@@ -21,29 +21,12 @@ public class Following : BaseState
         initialPosition = stateMachine.transform.position;
 
         //-- Adjust Runtime values
-        stateMachine.runTimeSight = stateMachine.stats.sightRadius * 2f;
-        stateMachine.runTimeMoveSpeed = stateMachine.stats.moveSpeed * 2f;
+        stateMachine.sightRadius = stateMachine.stats.sightRadius * 2f;
+        stateMachine.moveSpeed = stateMachine.stats.moveSpeed * 2f;
     }
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-
-        //-- Has target
-        if (stateMachine.target != null)
-        {
-            stateMachine.agent.destination = stateMachine.target.transform.position;
-
-            //-- Is in attackRange
-            if (Vector3.Distance(stateMachine.transform.position, stateMachine.target.transform.position) <= stateMachine.stats.attackRange)
-                stateMachine.ChangeState(stateMachine.attackingState);
-        }
-        //-- Has no target
-        else
-        {
-            stateMachine.agent.destination = initialPosition; //-> Return to initial position and go to idle state
-            stateMachine.target = null; //-> Reset target
-            stateMachine.ChangeState(stateMachine.idleState);
-        }
     }
     public override void UpdatePhysics()
     {
@@ -52,5 +35,8 @@ public class Following : BaseState
     public override void Exit()
     {
         base.Exit();
+
+        stateMachine.agent.destination = initialPosition; //-> Return to initial position and go to idle state
+        stateMachine.target = null; //-> Reset target
     }
 }

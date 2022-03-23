@@ -21,21 +21,12 @@ public class Attacking : BaseState
         base.UpdateLogic();
 
         //-- Has target
-        if(stateMachine.target != null)
+        if (stateMachine.target != null)
         {
             //-- Target is in range
             if (Vector3.Distance(stateMachine.transform.position, stateMachine.target.transform.position) <= stateMachine.stats.attackRange)
                 Attack();
-
-            //-- Target is not in range
-            else
-                stateMachine.ChangeState(stateMachine.followingState);
-
         }
-
-        else
-            stateMachine.ChangeState(stateMachine.idleState);
-
     }
     public override void UpdatePhysics()
     {

@@ -7,6 +7,20 @@ using UnityEngine.AI;
 public class StateMachine : MonoBehaviour
 {
     public NPCStats stats;
+
+    [HideInInspector]
+    public float moveSpeed;
+    [HideInInspector]
+    public float moveRadius;
+    [HideInInspector]
+    public float sightRadius;
+    [HideInInspector]
+    public float attackDamage;
+    [HideInInspector]
+    public float attackRange;
+    [HideInInspector]
+    public Vector3 startPosition;
+
     protected BaseState currentState;
 
     [HideInInspector]
@@ -17,6 +31,8 @@ public class StateMachine : MonoBehaviour
     public virtual void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        GetValues();
+        startPosition = transform.position;
     }
     public virtual void Start()
     {
@@ -50,5 +66,14 @@ public class StateMachine : MonoBehaviour
     public virtual BaseState GetInitialState()
     {
         return null;
+    }
+
+    private void GetValues()
+    {
+        moveSpeed = stats.moveSpeed;
+        moveRadius = stats.moveRadius;
+        sightRadius = stats.sightRadius;
+        attackDamage = stats.attackDamage;
+        attackRange = stats.attackRange;
     }
 }
