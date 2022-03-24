@@ -20,10 +20,12 @@ public class StateMachine : MonoBehaviour
     public float attackRange;
     [HideInInspector]
     public Vector3 startPosition;
+    [HideInInspector]
+    public LayerMask enemyLayer;
 
     protected BaseState currentState;
 
-    [HideInInspector]
+    //[HideInInspector]
     public GameObject target;
     [HideInInspector]
     public NavMeshAgent agent;
@@ -75,5 +77,6 @@ public class StateMachine : MonoBehaviour
         sightRadius = stats.sightRadius;
         attackDamage = stats.attackDamage;
         attackRange = stats.attackRange;
+        enemyLayer = stats.enemyLayer;
     }
 }

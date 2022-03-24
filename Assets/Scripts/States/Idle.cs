@@ -6,7 +6,6 @@ public class Idle : BaseState
 {
     private EntitySM stateMachine;
     public float idleTimer;
-    private float idleTime = Random.Range(1,4);
 
     public Idle(EntitySM _sm) : base(_sm) 
     { 
@@ -18,8 +17,7 @@ public class Idle : BaseState
     {
         base.Enter();
 
-        idleTimer = idleTime;
-        stateMachine.target = null; //-> Reset target
+        idleTimer = Random.Range(1, 4);
         stateMachine.sightRadius = stateMachine.stats.sightRadius; //-> Reset runtimeSight
         stateMachine.moveSpeed = stateMachine.stats.moveSpeed; //-> Reset agent movespeed to normal value
     }
@@ -28,7 +26,8 @@ public class Idle : BaseState
     {
         base.UpdateLogic();
 
-        idleTimer -= Time.deltaTime;
+        if(stateMachine.agent.remainingDistance == 0)
+            idleTimer -= Time.deltaTime;
     }
 
     public override void UpdatePhysics()

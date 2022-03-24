@@ -38,10 +38,12 @@ public class EntitySM : StateMachine
         #region Enemy detection
         //-- Set target if enemies in range and has no target
         if (GetEnemies(sightRadius).Length > 0)
-            target = GetEnemies(sightRadius)[0].transform.gameObject;
+            if (target == null)
+                target = GetEnemies(sightRadius)[0].transform.gameObject;
 
-        else if (GetEnemies(sightRadius).Length == 0)
-            target = null;
+        if (GetEnemies(sightRadius).Length == 0)
+            if (target != null)
+                target = null;
         #endregion
 
         if (currentState is Idle)
@@ -58,87 +60,84 @@ public class EntitySM : StateMachine
 
     }
 
+    #region StateTransitionConditions
     private void CheckIdleConditions()
     {
         //-- has target
         if (target != null)
-            //-- is in attackRange
-            if (Vector3.Distance(transform.position, target.transform.position) < attackRange)
+        {//-- is in attackRange
+            if (InAttackRange())
                 ChangeState(attackingState);
             //-- not in attackRange
             else
                 ChangeState(followingState);
-
+        }
         //-- no target
         else
             //-- idleTimer < 0
-            if(idleState.idleTimer < 0)
-                ChangeState(roamingState);
+            if (idleState.idleTimer < 0)
+            ChangeState(roamingState);
     }
     private void CheckRoamingConditions()
     {
-        //-- destination reached
-
         //-- has target
-            //-- not in attackRange
-            //-- is in attackRange
-
-
-
-        //-- If has target
         if (target != null)
-            ChangeState(followingState);
-
-        //-- If calculated path is not valid
+        {//-- is in attackRange
+            if (InAttackRange())
+                ChangeState(attackingState);
+            //-- not in attackRange
+            else
+                ChangeState(followingState);
+        }
+        //-- calculated path is not valid 
         if (agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathPartial)
             ChangeState(idleState);
 
-        //-- If destination was reached
+        //-- destination reached
         if (agent.remainingDistance == 0 && agent.path != null)
             ChangeState(idleState);
     }
-
     private void CheckFollowingConditions()
     {
         //-- Has target
         if (target != null)
-        {
-            agent.destination = target.transform.position;
-
-            //-- Is in attackRange
-            if (Vector3.Distance(transform.position, target.transform.position) <= stats.attackRange)
+        {//-- Is in attackRange
+            if (InAttackRange())
                 ChangeState(attackingState);
         }
-        //-- Has no target
+        //-- no target
         else
-        {
             ChangeState(idleState);
-        }
     }
-
     private void CheckAttackingConditions()
     {
         //-- Has target
         if (target != null)
-        {
-            //-- Target is not in range
-            if(Vector3.Distance(transform.position, target.transform.position) > stats.attackRange)
+        {//-- not in attackRange
+            if (!InAttackRange())
                 ChangeState(followingState);
         }
+        //-- no target
         else
             ChangeState(idleState);
     }
+    #endregion
 
+    #region RuntimeCalculations
     public RaycastHit[] GetEnemies(float _radius)
     {
-        return Physics.SphereCastAll(transform.position, _radius, Vector3.up, Mathf.Infinity, stats.enemyLayer);
+        return Physics.SphereCastAll(transform.position, _radius, Vector3.up, float.MaxValue, enemyLayer);
     }
+    private bool InAttackRange()
+    {
+        return Vector3.Distance(transform.position, target.transform.position) < attackRange;
+    }
+    #endregion
 
     public override BaseState GetInitialState()
     {
         return idleState;
     }
-
     private void OnDrawGizmos()
     {
         //-- Sight Radius

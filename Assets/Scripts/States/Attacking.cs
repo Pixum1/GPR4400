@@ -20,13 +20,7 @@ public class Attacking : BaseState
     {
         base.UpdateLogic();
 
-        //-- Has target
-        if (stateMachine.target != null)
-        {
-            //-- Target is in range
-            if (Vector3.Distance(stateMachine.transform.position, stateMachine.target.transform.position) <= stateMachine.stats.attackRange)
-                Attack();
-        }
+        
     }
     public override void UpdatePhysics()
     {
@@ -35,9 +29,5 @@ public class Attacking : BaseState
     public override void Exit()
     {
         base.Exit();
-    }
-    private void Attack()
-    {
-        
     }
 }

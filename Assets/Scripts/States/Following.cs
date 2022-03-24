@@ -23,10 +23,14 @@ public class Following : BaseState
         //-- Adjust Runtime values
         stateMachine.sightRadius = stateMachine.stats.sightRadius * 2f;
         stateMachine.moveSpeed = stateMachine.stats.moveSpeed * 2f;
+
     }
     public override void UpdateLogic()
     {
         base.UpdateLogic();
+
+        //-- set destination
+        stateMachine.agent.SetDestination(stateMachine.target.transform.position);
     }
     public override void UpdatePhysics()
     {
@@ -36,7 +40,6 @@ public class Following : BaseState
     {
         base.Exit();
 
-        stateMachine.agent.destination = initialPosition; //-> Return to initial position and go to idle state
-        stateMachine.target = null; //-> Reset target
+        stateMachine.agent.SetDestination(initialPosition); //-> Return to initial position and go to idle state
     }
 }
