@@ -25,6 +25,11 @@ public class VectorField : MonoBehaviour
 
     private Vector3[,,] vectorField;
 
+    [SerializeField]
+    private Transform fieldModifier;
+    [SerializeField]
+    private Transform fieldModifier2;
+
     private void Awake()
     {
         InitVectorField();
@@ -54,8 +59,18 @@ public class VectorField : MonoBehaviour
                     vectorField[x, y, z] = Random.insideUnitSphere;
                     Vector3 rayPosition = GetRayPosition(x, y, z);
                     //vectorField[x, y, z] += Vector3.up * 0.2f; // bias for up facing vectors
-                    vectorField[x, y, z] += (transform.position - rayPosition) * biasMultiplier; //bias for center facing vectors
-                    //vectorField[x, y, z] += new Vector3(x / (x * x + y * y + 1), -y / (x * x + y * y + 1), 0) * biasMultiplier;
+
+                    //center force
+                    //vectorField[x, y, z] += (transform.position - rayPosition) * biasMultiplier; //bias for center facing vectors
+
+                    //Whirlpool field
+                    //vectorField[x, y, z] = (rayPosition.z / (rayPosition.x * rayPosition.x + rayPosition.z * rayPosition.z)) * fieldModifier.position.normalized * biasMultiplier -
+                    //    (rayPosition.x / (rayPosition.x * rayPosition.x + rayPosition.z * rayPosition.z)) * fieldModifier2.position.normalized;
+                    
+                    //Vortex field
+                    Vector3 newDir = new Vector3(rayPosition.z, 0, -rayPosition.x);
+                    vectorField[x, y, z] += (newDir * mResolution) * biasMultiplier;
+
                     vectorField[x, y, z].Normalize();
                 }
             }

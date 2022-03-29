@@ -126,4 +126,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vectorField: {fileID: 0}
-  forceMultiplier: 4
+  forceMultiplier: 2
