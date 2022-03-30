@@ -251,10 +251,11 @@ MonoBehaviour:
   mCohesionLerpAmount: 0.099
   mStepTime: 0.1
   biasMultiplier: 1
-  objectAmount: 1000
+  objectAmount: 200
   mObject: {fileID: 6538681256391427341, guid: d8a011af97a170f4d9c2ebf141d4e07c, type: 3}
   fieldModifier: {fileID: 2102966569}
   fieldModifier2: {fileID: 1470011543}
+  mGravitationalForce: 5
 --- !u!4 &744320388
 Transform:
   m_ObjectHideFlags: 0

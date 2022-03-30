@@ -29,6 +29,8 @@ public class VectorField : MonoBehaviour
     private Transform fieldModifier;
     [SerializeField]
     private Transform fieldModifier2;
+    [SerializeField]
+    private float mGravitationalForce;
 
     private void Awake()
     {
@@ -66,12 +68,19 @@ public class VectorField : MonoBehaviour
                     //Whirlpool field
                     //vectorField[x, y, z] = (rayPosition.z / (rayPosition.x * rayPosition.x + rayPosition.z * rayPosition.z)) * fieldModifier.position.normalized * biasMultiplier -
                     //    (rayPosition.x / (rayPosition.x * rayPosition.x + rayPosition.z * rayPosition.z)) * fieldModifier2.position.normalized;
-                    
-                    //Vortex field
-                    Vector3 newDir = new Vector3(rayPosition.z, 0, -rayPosition.x);
-                    vectorField[x, y, z] += (newDir * mResolution) * biasMultiplier;
 
-                    vectorField[x, y, z].Normalize();
+                    //Vortex field
+                    //Vector3 newDir = new Vector3(rayPosition.z, 0, -rayPosition.x);
+                    //vectorField[x, y, z] += (newDir * mResolution) * biasMultiplier;
+
+                    //Gravitational Vector Field
+                    Vector3 m1m2 = new Vector3(transform.position.x * rayPosition.x, transform.position.y * rayPosition.y, transform.position.z * rayPosition.z);
+                    float r = Vector3.Distance(transform.position, rayPosition);
+                    Vector3 t = new Vector3(rayPosition.x / (float)Mathf.Pow(r, 3), rayPosition.y / (float)Mathf.Pow(r, 3), rayPosition.z / (float)Mathf.Pow(r, 3));
+                    Vector3 force = -mGravitationalForce * new Vector3(m1m2.x * t.x, m1m2.y * t.y, m1m2.z * t.z);
+                    vectorField[x, y, z] += -mGravitationalForce * (rayPosition / (r * r));
+
+                    //vectorField[x, y, z].Normalize();
                 }
             }
         }
@@ -190,7 +199,7 @@ public class VectorField : MonoBehaviour
 
                         Gizmos.color = new Color(colorVec.x, colorVec.y, colorVec.z);
                         //Gizmos.DrawSphere(this.transform.position + localPos, 0.1f);
-                        Gizmos.DrawRay(this.transform.position + localPos, dir);
+                        Gizmos.DrawRay(this.transform.position + localPos, dir * dir.magnitude);
                     }
                 }
             }

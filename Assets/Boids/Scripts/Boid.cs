@@ -25,7 +25,6 @@ public class Boid : MonoBehaviour
 
     void Update()
     {
-
         Alignment();
         Cohesion();
         Separation();
@@ -50,37 +49,11 @@ public class Boid : MonoBehaviour
 
     private void ObstacleAvoidance()
     {
-        int amount = 300;
-
-        Vector3[] directions = new Vector3[amount];
-        Vector3 bestDir = transform.forward;
-        float furthestUnobstructedDst = 0;
-        RaycastHit hit;
-
-        for (int i = 0; i < directions.Length; i++)
+        if(Physics.SphereCast(transform.position, settings.AvoidanceRadius, Vector3.up, out RaycastHit hit, float.MaxValue, settings.ObstacleLayer))
         {
-            float t = (float) i / amount;
-            float inclination = Mathf.Acos(1 - 2 * t);
-            float azimuth = 2 * Mathf.PI * ((1 + Mathf.Sqrt(5)) / 2) * i;
-
-            float x = Mathf.Sin(inclination) * Mathf.Cos(azimuth);
-            float y = Mathf.Sin(inclination) * Mathf.Sin(azimuth);
-            float z = Mathf.Cos(inclination);
-            directions[i] = new Vector3(x, y, z);
-
-            Vector3 dir = transform.TransformDirection(directions[i]);
-            if(Physics.SphereCast(transform.position, settings.AvoidanceRadius, dir, out hit, settings.AvoidanceRadius, settings.ObstacleLayer))
-            {
-                if(hit.distance > furthestUnobstructedDst)
-                {
-                    currentVelocity += bestDir;
-                    furthestUnobstructedDst = hit.distance;
-                }
-                else
-                {
-                    currentVelocity += dir;
-                }
-            }
+            Vector3 newDir = transform.position - hit.point;
+            Vector3 vel = newDir * settings.Speed;
+            rb.velocity = vel * Time.deltaTime;
         }
     }
 
