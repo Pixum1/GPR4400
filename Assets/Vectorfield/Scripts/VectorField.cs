@@ -199,7 +199,7 @@ public class VectorField : MonoBehaviour
 
                         Gizmos.color = new Color(colorVec.x, colorVec.y, colorVec.z);
                         //Gizmos.DrawSphere(this.transform.position + localPos, 0.1f);
-                        Gizmos.DrawRay(this.transform.position + localPos, dir * dir.magnitude);
+                        Gizmos.DrawRay(this.transform.position + localPos, dir /* * dir.magnitude*/);
                     }
                 }
             }

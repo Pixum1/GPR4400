@@ -9,7 +9,7 @@ public class BoidSettings : ScriptableObject
     [SerializeField] private float radius;
     [SerializeField] private LayerMask boidLayer;
     [SerializeField] private float speed;
-    [SerializeField] private int avoidanceRadius;
+    [SerializeField] private float avoidanceRadius;
     [SerializeField] private LayerMask obstacleLayer;
     [SerializeField] private float avoidanceSensitivity;
 
@@ -19,7 +19,7 @@ public class BoidSettings : ScriptableObject
     public float Radius => radius;
     public LayerMask BoidLayer => boidLayer;
     public float Speed => speed;
-    public int AvoidanceRadius => avoidanceRadius;
+    public float AvoidanceRadius => avoidanceRadius;
     public LayerMask ObstacleLayer => obstacleLayer;
     public float AvoidanceSensitivity => avoidanceSensitivity;
 }
