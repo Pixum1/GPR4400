@@ -92,23 +92,6 @@ public class VectorField : MonoBehaviour
 
         return transform.position + localPos;
     }
-    private Vector3Int GetPositionInVectorField(Vector3 _position)
-    {
-        Vector3 startPos = this.transform.position + ((-(Vector3.one * mSize)) / 2f);
-        Vector3 dir = _position - startPos;
-        Vector3 idx = ((dir * (mResolution - 1)) / mSize);
-
-        int x = Mathf.RoundToInt(idx.x);
-        int y = Mathf.RoundToInt(idx.y);
-        int z = Mathf.RoundToInt(idx.z);
-
-        return new Vector3Int(x, y, z);
-    }
-    public Vector3 GetForceDirection(Vector3 _position)
-    {
-        Vector3Int newPos = GetPositionInVectorField(_position);
-        return GetAverageNeighbourhood(mResolution, newPos.x, newPos.y, newPos.z, true);
-    }
 
     private IEnumerator C_IterateField()
     {
@@ -139,6 +122,23 @@ public class VectorField : MonoBehaviour
         }
     }
 
+    private Vector3Int GetPositionInVectorField(Vector3 _position)
+    {
+        Vector3 startPos = this.transform.position + ((-(Vector3.one * mSize)) / 2f);
+        Vector3 dir = _position - startPos;
+        Vector3 idx = ((dir * (mResolution - 1)) / mSize);
+
+        int x = Mathf.RoundToInt(idx.x);
+        int y = Mathf.RoundToInt(idx.y);
+        int z = Mathf.RoundToInt(idx.z);
+
+        return new Vector3Int(x, y, z);
+    }
+    public Vector3 GetForceDirection(Vector3 _position)
+    {
+        Vector3Int newPos = GetPositionInVectorField(_position);
+        return GetAverageNeighbourhood(mResolution, newPos.x, newPos.y, newPos.z, true);
+    }
     private Vector3 GetAverageNeighbourhood(int _currRes, int _x, int _y, int _z, bool _countSelf = false)
     {
         Vector3 average = Vector3.zero;

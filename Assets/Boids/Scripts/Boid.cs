@@ -5,7 +5,7 @@ using UnityEngine.AI;
 public class Boid : MonoBehaviour
 {
     [SerializeField]
-    private BoidSettings settings;
+    private BoidSettings m_Settings;
 
     private List<Boid> neighbours;
     private SphereCollider col;
@@ -23,12 +23,13 @@ public class Boid : MonoBehaviour
         if (rb == null)
             rb = GetComponent<Rigidbody>();
 
-        rb.velocity = Random.insideUnitSphere * Time.deltaTime * settings.Speed;
+        rb.velocity = Random.insideUnitSphere * Time.deltaTime * m_Settings.Speed;
     }
 
     private void Update()
     {
-        col.radius = settings.Radius;
+        transform.localScale = Vector3.one * m_Settings.Size;
+        col.radius = m_Settings.Radius;
 
         transform.LookAt(transform.position + rb.velocity); //<- face rigidbody move direction
 
@@ -40,12 +41,12 @@ public class Boid : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity += ApplyObstacleAvoidance(settings.AvoidanceIntensity); //<- apply obstacle avoidance
-        rb.velocity += ApplyAlignment(settings.Alignment); //<- apply alignment
-        rb.velocity += ApplyCohesion(settings.Cohesion); //<- apply cohesion
-        rb.velocity += ApplySeperation(settings.Seperation); //<- apply seperation
+        rb.velocity += ApplyObstacleAvoidance(m_Settings.AvoidanceIntensity * (m_Settings.Speed * Time.deltaTime)); //<- apply obstacle avoidance
+        rb.velocity += ApplyAlignment(m_Settings.Alignment); //<- apply alignment
+        rb.velocity += ApplyCohesion(m_Settings.Cohesion); //<- apply cohesion
+        rb.velocity += ApplySeperation(m_Settings.Seperation); //<- apply seperation
 
-        rb.velocity = Vector3.ClampMagnitude(rb.velocity, settings.Speed * Time.fixedDeltaTime); //<- limit rigidbody velocity
+        rb.velocity = Vector3.ClampMagnitude(rb.velocity, m_Settings.Speed * Time.fixedDeltaTime); //<- limit rigidbody velocity
     }
 
     #region Boid behaviour
@@ -64,7 +65,7 @@ public class Boid : MonoBehaviour
 
         alignment /= neighbours.Count;
 
-        return alignment.normalized * _intensity;
+        return alignment * _intensity;
     }
 
     private Vector3 ApplyCohesion(float _intensity)
@@ -81,7 +82,7 @@ public class Boid : MonoBehaviour
 
         cohesion /= neighbours.Count;
 
-        return cohesion.normalized * _intensity;
+        return cohesion * _intensity;
     }
 
     private Vector3 ApplySeperation(float _intensity)
@@ -132,7 +133,7 @@ public class Boid : MonoBehaviour
 
     private Vector3 ApplyObstacleAvoidance(float _intensity)
     {
-        Vector3[] directions = RaySphere(settings.RayDensity, settings.AvoidanceRadius); //<- array with all directions
+        Vector3[] directions = RaySphere(m_Settings.RayDensity, m_Settings.AvoidanceRadius); //<- array with all directions
         Vector3 bestDir = Vector3.zero;
         float bestDirCount = 0; //<- count of all directions with no obstacle
 
@@ -142,7 +143,7 @@ public class Boid : MonoBehaviour
             Ray r = new Ray(transform.position, dir);
 
             //- All directions with no obstacle get added up
-            if (!Physics.Raycast(r, settings.AvoidanceRadius, settings.ObstacleLayer))
+            if (!Physics.Raycast(r, m_Settings.AvoidanceRadius, m_Settings.ObstacleLayer))
             {
                 bestDir += dir;
                 bestDirCount++;
