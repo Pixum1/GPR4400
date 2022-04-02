@@ -24,17 +24,17 @@ public class RigidbodyVectorField : MonoBehaviour
         rb.useGravity = false;
     }
 
+    private void Update()
+    {
+        Debug.DrawRay(transform.position, rb.velocity);
+    }
+
     private void FixedUpdate()
     {
         if (vectorField != null)
         {
             Vector3 vectorForce = vectorField.GetForceDirection(transform.position);
-            rb.AddForce(vectorForce * forceMultiplier);
+            rb.velocity += vectorForce * forceMultiplier;
         }
-    }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, rb.velocity.normalized);
     }
 }

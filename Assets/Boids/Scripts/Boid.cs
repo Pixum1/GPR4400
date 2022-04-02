@@ -4,16 +4,14 @@ using UnityEngine.AI;
 
 public class Boid : MonoBehaviour
 {
-    private List<Boid> neighbours;
-
     [SerializeField]
     private BoidSettings settings;
-    [SerializeField]
+
+    private List<Boid> neighbours;
     private SphereCollider col;
-    [SerializeField]
     private Rigidbody rb;
-    [SerializeField, Range(1, 5)]
-    private int mRayIterations;
+
+    private Vector3[] rayDirections;
 
     private void Start()
     {
@@ -42,18 +40,17 @@ public class Boid : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity += ObstacleAvoidance(mRayIterations, settings.AvoidanceRadius); //<- apply obstacle avoidance
-        rb.velocity += Alignment(settings.Alignment); //<- apply alignment
-        rb.velocity += Cohesion(settings.Cohesion); //<- apply cohesion
-        rb.velocity += Seperation(settings.Seperation); //<- apply seperation
+        rb.velocity += ApplyObstacleAvoidance(settings.AvoidanceIntensity); //<- apply obstacle avoidance
+        rb.velocity += ApplyAlignment(settings.Alignment); //<- apply alignment
+        rb.velocity += ApplyCohesion(settings.Cohesion); //<- apply cohesion
+        rb.velocity += ApplySeperation(settings.Seperation); //<- apply seperation
 
-        //rb.velocity += transform.forward; //<- initial speed
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, settings.Speed * Time.fixedDeltaTime); //<- limit rigidbody velocity
     }
 
     #region Boid behaviour
 
-    private Vector3 Alignment(float _intensity)
+    private Vector3 ApplyAlignment(float _intensity)
     {
         Vector3 alignment = Vector3.zero;
 
@@ -68,9 +65,9 @@ public class Boid : MonoBehaviour
         alignment /= neighbours.Count;
 
         return alignment.normalized * _intensity;
-    } 
+    }
 
-    private Vector3 Cohesion(float _intensity)
+    private Vector3 ApplyCohesion(float _intensity)
     {
         Vector3 cohesion = Vector3.zero;
 
@@ -87,11 +84,11 @@ public class Boid : MonoBehaviour
         return cohesion.normalized * _intensity;
     }
 
-    private Vector3 Seperation(float _intensity)
+    private Vector3 ApplySeperation(float _intensity)
     {
         Vector3 seperation = Vector3.zero;
 
-        if(neighbours.Count == 0)
+        if (neighbours.Count == 0)
             return Vector3.zero;
 
         for (int i = 0; i < neighbours.Count; i++)
@@ -107,48 +104,56 @@ public class Boid : MonoBehaviour
     #endregion
 
     #region ObstacleAvoidance
-    private Vector3 ObstacleAvoidance(int _rayIterations, float _length)
+    private Vector3[] RaySphere(int _rayDensity, float _length)
     {
-        Vector3 desiredVelocity = Vector3.zero;
-        List<RaycastHit> hits = new List<RaycastHit>(); //<- list of hit information of all rays that hit something
+        int rayAmount = (int)Mathf.Pow(_rayDensity * 2, 3);
+        rayDirections = new Vector3[rayAmount]; //<- Create array with the amount of rays generated
 
-        for (int y = -_rayIterations; y < _rayIterations; y++)
+        int count = 0;
+
+        for (int y = -_rayDensity; y < _rayDensity; y++)
         {
-            for (int z = -_rayIterations; z < _rayIterations; z++)
+            for (int z = -_rayDensity; z < _rayDensity; z++)
             {
-                for (int x = -_rayIterations; x < _rayIterations; x++)
+                for (int x = -_rayDensity; x < _rayDensity; x++)
                 {
-                    //-- Create a sphere of rays
                     Vector3 offset = new Vector3(x + .5f, y + .5f, z + .5f); //<- offset of each ray in local space
                     Vector3 localPos = transform.position + offset; //<- position of individual ray in world space
-                    Vector3 dir = localPos - transform.position; //<- direction of individual ray
+                    Vector3 dir = (transform.position - localPos).normalized * _length; //<- direction of individual ray
 
-                    dir.Normalize();
-
-                    desiredVelocity += CheckForCollision(dir * _length, hits);
+                    rayDirections[count] = dir;
+                    count++;
                 }
             }
         }
 
-        desiredVelocity /= hits.Count; //<- get average of all ray directions that hit
-
-        Debug.DrawRay(transform.position, desiredVelocity.normalized, Color.green);
-
-        return desiredVelocity.normalized * settings.AvoidanceSensitivity;
+        return rayDirections;
     }
 
-    private Vector3 CheckForCollision(Vector3 _dir, List<RaycastHit> _hitList)
+    private Vector3 ApplyObstacleAvoidance(float _intensity)
     {
-        Vector3 newDir = Vector3.zero;
-        if(Physics.Raycast(transform.position, _dir, out RaycastHit hit, _dir.magnitude, settings.ObstacleLayer))
-        {
-            newDir += transform.position - hit.point; //<- get oposite direction
-            _hitList.Add(hit); //<- add to list if hit
+        Vector3[] directions = RaySphere(settings.RayDensity, settings.AvoidanceRadius); //<- array with all directions
+        Vector3 bestDir = Vector3.zero;
+        float bestDirCount = 0; //<- count of all directions with no obstacle
 
-            Debug.DrawRay(transform.position, _dir, Color.red);
+        for (int i = 0; i < directions.Length; i++)
+        {
+            Vector3 dir = directions[i];
+            Ray r = new Ray(transform.position, dir);
+
+            //- All directions with no obstacle get added up
+            if (!Physics.Raycast(r, settings.AvoidanceRadius, settings.ObstacleLayer))
+            {
+                bestDir += dir;
+                bestDirCount++;
+            }
+            else
+                Debug.DrawRay(transform.position, dir, Color.red);
         }
 
-        return newDir;
+        bestDir /= bestDirCount; //<- get average of all directions
+
+        return bestDir * _intensity;
     }
     #endregion
 

@@ -74,11 +74,11 @@ public class VectorField : MonoBehaviour
                     //vectorField[x, y, z] += (newDir * mResolution) * biasMultiplier;
 
                     //Gravitational Vector Field
-                    Vector3 m1m2 = new Vector3(transform.position.x * rayPosition.x, transform.position.y * rayPosition.y, transform.position.z * rayPosition.z);
-                    float r = Vector3.Distance(transform.position, rayPosition);
-                    Vector3 t = new Vector3(rayPosition.x / (float)Mathf.Pow(r, 3), rayPosition.y / (float)Mathf.Pow(r, 3), rayPosition.z / (float)Mathf.Pow(r, 3));
-                    Vector3 force = -mGravitationalForce * new Vector3(m1m2.x * t.x, m1m2.y * t.y, m1m2.z * t.z);
-                    vectorField[x, y, z] += -mGravitationalForce * (rayPosition / (r * r));
+                    //Vector3 m1m2 = new Vector3(transform.position.x * rayPosition.x, transform.position.y * rayPosition.y, transform.position.z * rayPosition.z);
+                    //float r = Vector3.Distance(transform.position, rayPosition);
+                    //Vector3 t = new Vector3(rayPosition.x / (float)Mathf.Pow(r, 3), rayPosition.y / (float)Mathf.Pow(r, 3), rayPosition.z / (float)Mathf.Pow(r, 3));
+                    //Vector3 force = -mGravitationalForce * new Vector3(m1m2.x * t.x, m1m2.y * t.y, m1m2.z * t.z);
+                    //vectorField[x, y, z] += -mGravitationalForce * (rayPosition / (r * r));
 
                     //vectorField[x, y, z].Normalize();
                 }

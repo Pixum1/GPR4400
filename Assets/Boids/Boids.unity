@@ -308,11 +308,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1144751393, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Name
       value: Boid (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296057, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Constraints
@@ -379,6 +383,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: mRayDensity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: mResolution
       value: 5
       objectReference: {fileID: 0}
@@ -401,11 +409,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1144751393, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Name
       value: Boid (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296057, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Constraints
@@ -472,6 +484,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: mRayDensity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: mResolution
       value: 5
       objectReference: {fileID: 0}
@@ -494,11 +510,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1144751393, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Name
       value: Boid (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296057, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Constraints
@@ -563,6 +583,10 @@ PrefabInstance:
     - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: mRayLength
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: mRayDensity
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: mResolution
@@ -777,11 +801,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1144751393, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Name
       value: Boid (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296057, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Constraints
@@ -848,6 +876,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: mRayDensity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: mResolution
       value: 5
       objectReference: {fileID: 0}
@@ -870,11 +902,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1144751393, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Name
       value: Boid (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296057, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Constraints
@@ -939,6 +975,10 @@ PrefabInstance:
     - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: mRayLength
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: mRayDensity
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: mResolution
@@ -1058,11 +1098,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1144751393, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Name
       value: Boid (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296057, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Constraints
@@ -1127,6 +1171,10 @@ PrefabInstance:
     - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: mRayLength
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: mRayDensity
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: mResolution
@@ -1341,11 +1389,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1144751393, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Name
       value: Boid (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296057, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Constraints
@@ -1412,6 +1464,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: mRayDensity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: mResolution
       value: 5
       objectReference: {fileID: 0}
@@ -1434,11 +1490,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1144751393, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Name
       value: Boid (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296057, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Constraints
@@ -1503,6 +1563,10 @@ PrefabInstance:
     - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: mRayLength
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: mRayDensity
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: mResolution
@@ -1717,11 +1781,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1144751393, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Name
       value: Boid (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296057, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Constraints
@@ -1786,6 +1854,10 @@ PrefabInstance:
     - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: mRayLength
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: mRayDensity
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: mResolution
@@ -1946,11 +2018,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1144751393, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Name
       value: Boid (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296057, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Constraints
@@ -2017,6 +2093,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: mRayDensity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: mResolution
       value: 5
       objectReference: {fileID: 0}
@@ -2039,11 +2119,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1144751393, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Name
       value: Boid (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296057, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Constraints
@@ -2110,6 +2194,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: mRayDensity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: mResolution
       value: 5
       objectReference: {fileID: 0}
@@ -2132,11 +2220,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1144751393, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Name
       value: Boid (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296057, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Constraints
@@ -2201,6 +2293,10 @@ PrefabInstance:
     - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: mRayLength
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: mRayDensity
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: mResolution
@@ -2320,11 +2416,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1144751393, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Name
       value: Boid (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296057, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Constraints
@@ -2391,6 +2491,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: mRayDensity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: mResolution
       value: 5
       objectReference: {fileID: 0}
@@ -2413,11 +2517,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1144751393, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Name
       value: Boid (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296057, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Constraints
@@ -2482,6 +2590,10 @@ PrefabInstance:
     - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: mRayLength
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: mRayDensity
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: mResolution
@@ -2601,11 +2713,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1144751393, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Name
       value: Boid (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296057, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Constraints
@@ -2672,6 +2788,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: mRayDensity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: mResolution
       value: 5
       objectReference: {fileID: 0}
@@ -2694,7 +2814,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1144751393, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: m_Name
@@ -2763,6 +2883,10 @@ PrefabInstance:
     - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: mRayLength
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+      propertyPath: mRayDensity
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
       propertyPath: mResolution
