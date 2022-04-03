@@ -13,6 +13,8 @@ public class Boid : MonoBehaviour
 
     private Vector3[] rayDirections;
 
+    int rayDenseTemp;
+
     private void Start()
     {
         neighbours = new List<Boid>();
@@ -24,12 +26,14 @@ public class Boid : MonoBehaviour
             rb = GetComponent<Rigidbody>();
 
         rb.velocity = Random.insideUnitSphere * Time.deltaTime * m_Settings.Speed;
+
+        rayDirections = RaySphere(m_Settings.RayDensity);
     }
 
     private void Update()
     {
         transform.localScale = Vector3.one * m_Settings.Size;
-        col.radius = m_Settings.Radius;
+        col.radius = m_Settings.BoidRadius;
 
         transform.LookAt(transform.position + rb.velocity); //<- face rigidbody move direction
 
@@ -37,11 +41,20 @@ public class Boid : MonoBehaviour
         {
             Debug.DrawLine(transform.position, neighbours[i].transform.position, Color.blue);
         }
+
+        if (rayDenseTemp != m_Settings.RayDensity)
+            rayDirections = RaySphere(m_Settings.RayDensity);
+
+        rayDenseTemp = m_Settings.RayDensity;
     }
 
     private void FixedUpdate()
     {
-        rb.velocity += ApplyObstacleAvoidance(m_Settings.AvoidanceIntensity * (m_Settings.Speed * Time.deltaTime)); //<- apply obstacle avoidance
+        if (IsHeadingForObstacle())
+        {
+            rb.velocity += ApplyObstacleAvoidance(m_Settings.AvoidanceIntensity * (m_Settings.Speed * Time.deltaTime), m_Settings.AvoidanceRadius); //<- apply obstacle avoidance
+        }
+
         rb.velocity += ApplyAlignment(m_Settings.Alignment); //<- apply alignment
         rb.velocity += ApplyCohesion(m_Settings.Cohesion); //<- apply cohesion
         rb.velocity += ApplySeperation(m_Settings.Seperation); //<- apply seperation
@@ -105,7 +118,15 @@ public class Boid : MonoBehaviour
     #endregion
 
     #region ObstacleAvoidance
-    private Vector3[] RaySphere(int _rayDensity, float _length)
+
+    private bool IsHeadingForObstacle()
+    {
+        if (Physics.OverlapSphere(transform.position, m_Settings.AvoidanceRadius * m_Settings.AvoidanceIntensity, m_Settings.ObstacleLayer).Length > 0)
+            return true;
+        else
+            return false;
+    }
+    private Vector3[] RaySphere(int _rayDensity)
     {
         int rayAmount = (int)Mathf.Pow(_rayDensity * 2, 3);
         rayDirections = new Vector3[rayAmount]; //<- Create array with the amount of rays generated
@@ -120,7 +141,7 @@ public class Boid : MonoBehaviour
                 {
                     Vector3 offset = new Vector3(x + .5f, y + .5f, z + .5f); //<- offset of each ray in local space
                     Vector3 localPos = transform.position + offset; //<- position of individual ray in world space
-                    Vector3 dir = (transform.position - localPos).normalized * _length; //<- direction of individual ray
+                    Vector3 dir = (transform.position - localPos).normalized; //<- direction of individual ray
 
                     rayDirections[count] = dir;
                     count++;
@@ -130,16 +151,14 @@ public class Boid : MonoBehaviour
 
         return rayDirections;
     }
-
-    private Vector3 ApplyObstacleAvoidance(float _intensity)
+    private Vector3 ApplyObstacleAvoidance(float _intensity, float _rayLength)
     {
-        Vector3[] directions = RaySphere(m_Settings.RayDensity, m_Settings.AvoidanceRadius); //<- array with all directions
         Vector3 bestDir = Vector3.zero;
         float bestDirCount = 0; //<- count of all directions with no obstacle
 
-        for (int i = 0; i < directions.Length; i++)
+        for (int i = 0; i < rayDirections.Length; i++)
         {
-            Vector3 dir = directions[i];
+            Vector3 dir = rayDirections[i] * _rayLength;
             Ray r = new Ray(transform.position, dir);
 
             //- All directions with no obstacle get added up
@@ -152,7 +171,8 @@ public class Boid : MonoBehaviour
                 Debug.DrawRay(transform.position, dir, Color.red);
         }
 
-        bestDir /= bestDirCount; //<- get average of all directions
+        if (bestDirCount > 0)
+            bestDir /= bestDirCount; //<- get average of all directions
 
         return bestDir * _intensity;
     }

@@ -16,13 +16,22 @@ public class BoidSpawner : MonoBehaviour
         for (int i = 0; i < m_BoidAmount; i++)
         {
             GameObject g = Instantiate(m_BoidPrefab, transform);
-            g.transform.position += Random.insideUnitSphere * m_SpawnRadius;
+            g.transform.position += RandomPointInBox(transform.position, Vector3.one * m_SpawnRadius);
         }
+    }
+    private Vector3 RandomPointInBox(Vector3 center, Vector3 size)
+    {
+
+        return center + new Vector3(
+           (Random.value - 0.5f) * size.x,
+           (Random.value - 0.5f) * size.y,
+           (Random.value - 0.5f) * size.z
+        );
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(transform.position, m_SpawnRadius);
+        Gizmos.DrawWireCube(transform.position, Vector3.one * m_SpawnRadius);
     }
 }

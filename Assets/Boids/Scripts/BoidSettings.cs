@@ -29,7 +29,7 @@ public class BoidSettings : ScriptableObject
     public float Alignment => m_AlignmentIntensity;
     public float Cohesion => m_CohesionIntensity;
     public float Seperation => m_SeperationIntensity;
-    public float Radius => m_BoidRadius;
+    public float BoidRadius => m_BoidRadius;
     public LayerMask BoidLayer => m_BoidLayer;
     public float Speed => m_MoveSpeed;
     public float AvoidanceRadius => m_AvoidanceRadius;
