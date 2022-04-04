@@ -34,7 +34,7 @@ public class RigidbodyVectorField : MonoBehaviour
         if (vectorField != null)
         {
             Vector3 vectorForce = vectorField.GetForceDirection(transform.position);
-            rb.velocity += vectorForce * forceMultiplier;
+            rb.velocity += vectorForce.normalized * forceMultiplier;
         }
     }
 }
