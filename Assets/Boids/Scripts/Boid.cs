@@ -46,7 +46,21 @@ public class Boid : MonoBehaviour
             rayDirections = RaySphere(m_Settings.RayDensity);
 
         rayDenseTemp = m_Settings.RayDensity;
+
+        //#region Boid Behaviour and Obstacle Avoidance
+        //if (IsHeadingForObstacle())
+        //{
+        //    rb.velocity += ApplyObstacleAvoidance(m_Settings.AvoidanceIntensity * (m_Settings.Speed * Time.deltaTime), m_Settings.AvoidanceRadius); //<- apply obstacle avoidance
+        //}
+
+        //rb.velocity += ApplyAlignment(m_Settings.Alignment); //<- apply alignment
+        //rb.velocity += ApplyCohesion(m_Settings.Cohesion); //<- apply cohesion
+        //rb.velocity += ApplySeperation(m_Settings.Seperation); //<- apply seperation
+
+        //rb.velocity = Vector3.ClampMagnitude(rb.velocity, m_Settings.Speed * Time.fixedDeltaTime); //<- limit rigidbody velocity
+        //#endregion
     }
+
 
     private void FixedUpdate()
     {
@@ -182,13 +196,13 @@ public class Boid : MonoBehaviour
     private void OnTriggerEnter(Collider _other)
     {
         Boid b = _other.GetComponent<Boid>();
-        if (b != null)
+        if (b != null && _other.isTrigger == false)
             neighbours.Add(b);
     }
     private void OnTriggerExit(Collider _other)
     {
         Boid b = _other.GetComponent<Boid>();
-        if (b != null)
+        if (b != null && _other.isTrigger == false)
             neighbours.Remove(b);
     }
     #endregion

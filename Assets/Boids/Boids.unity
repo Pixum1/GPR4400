@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 17582510}
   - component: {fileID: 17582509}
   - component: {fileID: 17582508}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sphere (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,10 +305,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 20559293}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.49999997}
   m_Children: []
-  m_Father: {fileID: 1419526624}
+  m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &62939958
@@ -323,7 +323,7 @@ GameObject:
   - component: {fileID: 62939962}
   - component: {fileID: 62939961}
   - component: {fileID: 62939960}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sphere (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -487,7 +487,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 33.4, y: -27.621, z: -1.477}
 --- !u!1 &243310244
 GameObject:
@@ -501,7 +501,7 @@ GameObject:
   - component: {fileID: 243310248}
   - component: {fileID: 243310247}
   - component: {fileID: 243310246}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Obstacle (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -596,7 +596,7 @@ GameObject:
   - component: {fileID: 309912263}
   - component: {fileID: 309912262}
   - component: {fileID: 309912261}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Obstacle (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -691,7 +691,7 @@ GameObject:
   - component: {fileID: 374497685}
   - component: {fileID: 374497684}
   - component: {fileID: 374497683}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Obstacle (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -786,7 +786,7 @@ GameObject:
   - component: {fileID: 482796217}
   - component: {fileID: 482796216}
   - component: {fileID: 482796215}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -881,7 +881,7 @@ GameObject:
   - component: {fileID: 590161089}
   - component: {fileID: 590161088}
   - component: {fileID: 590161087}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -962,7 +962,7 @@ Transform:
   m_LocalScale: {x: 1, y: 100, z: 102}
   m_Children: []
   m_Father: {fileID: 1419526624}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &660821653
 GameObject:
@@ -976,7 +976,7 @@ GameObject:
   - component: {fileID: 660821656}
   - component: {fileID: 660821655}
   - component: {fileID: 660821654}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1071,7 +1071,7 @@ GameObject:
   - component: {fileID: 847387829}
   - component: {fileID: 847387828}
   - component: {fileID: 847387827}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Obstacle (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1166,7 +1166,7 @@ GameObject:
   - component: {fileID: 873338787}
   - component: {fileID: 873338786}
   - component: {fileID: 873338785}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sphere (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1261,7 +1261,7 @@ GameObject:
   - component: {fileID: 963869152}
   - component: {fileID: 963869151}
   - component: {fileID: 963869150}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sphere (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1356,7 +1356,7 @@ GameObject:
   - component: {fileID: 1053816532}
   - component: {fileID: 1053816531}
   - component: {fileID: 1053816530}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1451,7 +1451,7 @@ GameObject:
   - component: {fileID: 1116955866}
   - component: {fileID: 1116955865}
   - component: {fileID: 1116955864}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Obstacle (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1546,7 +1546,7 @@ GameObject:
   - component: {fileID: 1176140678}
   - component: {fileID: 1176140677}
   - component: {fileID: 1176140676}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1627,7 +1627,7 @@ Transform:
   m_LocalScale: {x: 1, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 1419526624}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1284533291
 GameObject:
@@ -1658,7 +1658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 226e3113a7054c94b97fa8b49482fc42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BoidAmount: 200
+  m_BoidAmount: 1000
   m_BoidPrefab: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
   m_SpawnRadius: 48.57
 --- !u!4 &1284533293
@@ -1673,7 +1673,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1367948234
 GameObject:
@@ -1687,7 +1687,7 @@ GameObject:
   - component: {fileID: 1367948238}
   - component: {fileID: 1367948237}
   - component: {fileID: 1367948236}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1706,7 +1706,7 @@ Transform:
   m_LocalScale: {x: 1, y: 102, z: 102}
   m_Children: []
   m_Father: {fileID: 1419526624}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!65 &1367948236
 BoxCollider:
@@ -1782,7 +1782,7 @@ GameObject:
   - component: {fileID: 1380378677}
   - component: {fileID: 1380378676}
   - component: {fileID: 1380378675}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1874,7 +1874,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1419526624}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Environment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1892,7 +1892,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
-  - {fileID: 20559295}
   - {fileID: 1424669667}
   - {fileID: 1176140679}
   - {fileID: 590161090}
@@ -1901,7 +1900,7 @@ Transform:
   - {fileID: 1367948235}
   - {fileID: 1987007674}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1424669663
 GameObject:
@@ -1915,7 +1914,7 @@ GameObject:
   - component: {fileID: 1424669666}
   - component: {fileID: 1424669665}
   - component: {fileID: 1424669664}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1996,7 +1995,7 @@ Transform:
   m_LocalScale: {x: 1, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 1419526624}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1522469522
 GameObject:
@@ -2010,7 +2009,7 @@ GameObject:
   - component: {fileID: 1522469526}
   - component: {fileID: 1522469525}
   - component: {fileID: 1522469524}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2105,7 +2104,7 @@ GameObject:
   - component: {fileID: 1678561879}
   - component: {fileID: 1678561878}
   - component: {fileID: 1678561877}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2186,7 +2185,7 @@ Transform:
   m_LocalScale: {x: 1, y: 100, z: 102}
   m_Children: []
   m_Father: {fileID: 1419526624}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &1731589508
 GameObject:
@@ -2200,7 +2199,7 @@ GameObject:
   - component: {fileID: 1731589512}
   - component: {fileID: 1731589511}
   - component: {fileID: 1731589510}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Obstacle (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2292,7 +2291,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1987007674}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Obstacles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2328,7 +2327,7 @@ Transform:
   - {fileID: 1116955863}
   - {fileID: 847387826}
   m_Father: {fileID: 1419526624}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2007033879
 GameObject:
@@ -2342,7 +2341,7 @@ GameObject:
   - component: {fileID: 2007033883}
   - component: {fileID: 2007033882}
   - component: {fileID: 2007033881}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sphere (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2437,7 +2436,7 @@ GameObject:
   - component: {fileID: 2075137226}
   - component: {fileID: 2075137225}
   - component: {fileID: 2075137224}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2518,7 +2517,7 @@ Transform:
   m_LocalScale: {x: 1, y: 102, z: 102}
   m_Children: []
   m_Father: {fileID: 1419526624}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!1 &2143236304
 GameObject:
@@ -2532,7 +2531,7 @@ GameObject:
   - component: {fileID: 2143236308}
   - component: {fileID: 2143236307}
   - component: {fileID: 2143236306}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Obstacle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

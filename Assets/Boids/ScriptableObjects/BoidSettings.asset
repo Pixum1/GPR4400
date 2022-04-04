@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: BoidSettings
   m_EditorClassIdentifier: 
   m_MoveSpeed: 200
-  m_Size: 0.5
+  m_Size: 0.4
   m_AlignmentIntensity: 1.22
   m_CohesionIntensity: 1.02
   m_SeperationIntensity: 1.27
   m_AvoidanceIntensity: 0.3
-  m_RayDensity: 1
+  m_RayDensity: 2
   m_BoidRadius: 3
-  m_AvoidanceRadius: 5
+  m_AvoidanceRadius: 3
   m_ObstacleLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 512
   m_BoidLayer:
     serializedVersion: 2
     m_Bits: 256
