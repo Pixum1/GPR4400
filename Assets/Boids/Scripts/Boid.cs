@@ -10,8 +10,7 @@ public class Boid : MonoBehaviour
     [HideInInspector] public SphereCollider col;
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public Vector3[] rayDirections;
-    [SerializeField]
-    public BoidSettings m_Settings;
+    [SerializeField] public BoidSettings m_Settings;
 
     private void Awake()
     {
@@ -81,7 +80,7 @@ public class Boid : MonoBehaviour
 
     private bool IsInLayerMask(GameObject _go, LayerMask _layerMask)
     {
-        return (1 << _go.layer & _layerMask) == 0;
+        return (1 << _go.layer & _layerMask) != 0;
     }
     #endregion
 }
