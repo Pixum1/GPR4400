@@ -7,7 +7,7 @@ public class BoidSpawner : MonoBehaviour
     [SerializeField]
     private float m_BoidAmount;
     [SerializeField]
-    private GameObject m_BoidPrefab;
+    private Boid m_BoidPrefab;
     [SerializeField]
     private float m_SpawnRadius;
 
@@ -15,7 +15,7 @@ public class BoidSpawner : MonoBehaviour
     {
         for (int i = 0; i < m_BoidAmount; i++)
         {
-            GameObject g = Instantiate(m_BoidPrefab, transform);
+            Boid g = Instantiate(m_BoidPrefab, transform);
             g.transform.position += RandomPointInBox(transform.position, Vector3.one * m_SpawnRadius);
         }
     }

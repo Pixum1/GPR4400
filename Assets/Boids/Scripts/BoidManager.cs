@@ -9,11 +9,19 @@ public class BoidManager : MonoBehaviour
 
     int rayDenseTemp;
 
+    private Octtree octtree;
+    private List<Boid> returnedObjects;
+
+    private void Start()
+    {
+        octtree = new Octtree(0, new Box(500, 500, 500, transform.position));   
+    }
+
     private void Update()
     {
         for (int i = 0; i < Boids.Count; i++)
         {
-
+            
             Boids[i].transform.localScale = Vector3.one * Boids[i].m_Settings.Size;
             Boids[i].col.radius = Boids[i].m_Settings.BoidRadius;
 
@@ -110,7 +118,7 @@ public class BoidManager : MonoBehaviour
         else
             return false;
     }
-    
+
     private Vector3 ApplyObstacleAvoidance(float _intensity, float _rayLength, Boid _boid)
     {
         Vector3 bestDir = Vector3.zero;
@@ -128,7 +136,7 @@ public class BoidManager : MonoBehaviour
                 bestDirCount++;
             }
             //else
-                //Debug.DrawRay(_boid.transform.position, dir, Color.red);
+            //Debug.DrawRay(_boid.transform.position, dir, Color.red);
         }
 
         if (bestDirCount > 0)

@@ -16,8 +16,8 @@ GameObject:
   - component: {fileID: 2814136426653296002}
   - component: {fileID: 2814136426653296057}
   - component: {fileID: 5764786119693084334}
-  m_Layer: 10
-  m_Name: Boid1
+  m_Layer: 12
+  m_Name: Boid3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 64c7070c97bc5d04e8c794885ae0f718, type: 2}
+  - {fileID: 2100000, guid: 28766e644f5d9ad4ab3c7cfac42c0c80, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -102,7 +102,7 @@ MonoBehaviour:
   col: {fileID: 0}
   rb: {fileID: 0}
   rayDirections: []
-  m_Settings: {fileID: 11400000, guid: 351b7f49251bd7349877684de2449da5, type: 2}
+  m_Settings: {fileID: 11400000, guid: 577aac5e5cee63a49bdfb7a7fce12c9d, type: 2}
 --- !u!65 &1144751393
 BoxCollider:
   m_ObjectHideFlags: 0

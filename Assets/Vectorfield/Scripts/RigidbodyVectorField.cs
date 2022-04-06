@@ -26,11 +26,6 @@ public class RigidbodyVectorField : MonoBehaviour
 
     private void Update()
     {
-        Debug.DrawRay(transform.position, rb.velocity);
-    }
-
-    private void FixedUpdate()
-    {
         if (vectorField != null)
         {
             Vector3 vectorForce = vectorField.GetForceDirection(transform.position);
