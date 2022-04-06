@@ -10,18 +10,28 @@ public class BoidManager : MonoBehaviour
     int rayDenseTemp;
 
     private Octtree octtree;
-    private List<Boid> returnedObjects;
+    private List<Boid> returnedObjects = new List<Boid>();
 
     private void Start()
     {
-        octtree = new Octtree(0, new Box(500, 500, 500, transform.position));   
+        octtree = new Octtree(0, new Box(50, 50, 50, transform.position));   
     }
 
     private void Update()
     {
         for (int i = 0; i < Boids.Count; i++)
         {
-            
+            octtree.Clear();
+            octtree.Insert(Boids[i]);
+
+            returnedObjects.Clear();
+            octtree.Retrieve(returnedObjects, Boids[i]);
+
+            Boids[i].Neighbours = returnedObjects;
+
+
+
+
             Boids[i].transform.localScale = Vector3.one * Boids[i].m_Settings.Size;
             Boids[i].col.radius = Boids[i].m_Settings.BoidRadius;
 
