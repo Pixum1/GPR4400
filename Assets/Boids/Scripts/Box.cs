@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Box
+public struct Box
 {
     public Vector3 Center;
     public Vector3[] Bounds;

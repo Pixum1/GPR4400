@@ -5,7 +5,7 @@ using UnityEngine;
 public class Octtree
 {
     private int maxObjects = 10;
-    private int maxSubdivision = 5;
+    private int maxSubdivision = 10;
 
     private int level;
     public Box box;
@@ -49,7 +49,7 @@ public class Octtree
 
     }
 
-    private int GetIndex(Vector3 _position)
+    private int FindPositionInOctree(Vector3 _position)
     {
         bool isInTopQuadrant = _position.y > box.Center.y && _position.y < (box.Center.y + box.Size.y / 2);
         bool isInBottomQuadrant = _position.y > (box.Center.y - box.Size.y / 2) && _position.y < box.Center.y;
@@ -60,6 +60,7 @@ public class Octtree
         bool isInFrontQuadrant = _position.z > (box.Center.z - box.Size.z / 2f) && _position.z < box.Center.z;
         bool isInBackQuadrant = _position.z > box.Center.z && _position.z < (box.Center.z + box.Size.z / 2f);
 
+        //-- Get Location of given position within this node
         if (isInBottomQuadrant)
         {
             if (isInLeftQuadrant)
@@ -119,13 +120,15 @@ public class Octtree
         //--if node is not a leaf node
         if (nodes[0] != null)
         {
-            int index = GetIndex(_boid.transform.position); //<- Convert boid position into index of quadtree node
+            int index = FindPositionInOctree(_boid.transform.position); //<- Convert boid position into index of quadtree node
 
             //-- if boid can be put into one specific node
             if (index != -1)
-                nodes[index].Insert(_boid);
+            {
+                nodes[index].Insert(_boid); //<- call function until leaf node is reached
 
-            return;
+                return;
+            }
         }
 
         objects.Add(_boid); //<- add boid to the List of Objects
@@ -137,46 +140,55 @@ public class Octtree
             if (nodes[0] == null)
                 Split();
 
-            int i = 0;
-            while (i < objects.Count)
+            for (int i = 0; i < objects.Count; i++)
             {
-                int index = GetIndex(objects[i].transform.position); //<- Convert boid position into index of quadtree node
+                int index = FindPositionInOctree(objects[i].transform.position); //<- Convert boid position into index of quadtree node
                 //-- if object can be put into one specific node
                 if (index != -1)
                 {
                     nodes[index].Insert(objects[i]); //<- insert into child node
-                    objects.RemoveAt(i); //<- remove from current node
                 }
-                else
-                    i++;
             }
+            objects.Clear();
         }
     }
 
     public List<Boid> Retrieve(List<Boid> retrievedObjects, Boid _boid)
     {
-        int index = GetIndex(_boid.transform.position);
-        if(index != -1 && nodes[0] != null)
+        int index = FindPositionInOctree(_boid.transform.position); //<- Find Position of given Boid
+
+        //-- Retrieve all objects of all subnodes containing this Boid
+        if (index != -1 && nodes[0] != null)
             nodes[index].Retrieve(retrievedObjects, _boid);
 
-        retrievedObjects = objects;
+        retrievedObjects.AddRange(objects); //<- Add all objects of this node to a list
 
         return retrievedObjects;
     }
 
+
     public void Show()
     {
-        Debug.DrawLine(box.Bounds[0], box.Bounds[1], Color.red);
-        Debug.DrawLine(box.Bounds[0], box.Bounds[3], Color.red);
-        Debug.DrawLine(box.Bounds[0], box.Bounds[4], Color.red);
-        Debug.DrawLine(box.Bounds[1], box.Bounds[2], Color.red);
-        Debug.DrawLine(box.Bounds[1], box.Bounds[5], Color.red);
-        Debug.DrawLine(box.Bounds[2], box.Bounds[3], Color.red);
-        Debug.DrawLine(box.Bounds[2], box.Bounds[6], Color.red);
-        Debug.DrawLine(box.Bounds[3], box.Bounds[7], Color.red);
-        Debug.DrawLine(box.Bounds[4], box.Bounds[7], Color.red);
-        Debug.DrawLine(box.Bounds[4], box.Bounds[5], Color.red);
-        Debug.DrawLine(box.Bounds[5], box.Bounds[6], Color.red);
-        Debug.DrawLine(box.Bounds[6], box.Bounds[7], Color.red);
+        Color c = Color.green;
+        Debug.DrawLine(box.Bounds[0], box.Bounds[1], c);
+        Debug.DrawLine(box.Bounds[0], box.Bounds[3], c);
+        Debug.DrawLine(box.Bounds[0], box.Bounds[4], c);
+        Debug.DrawLine(box.Bounds[1], box.Bounds[2], c);
+        Debug.DrawLine(box.Bounds[1], box.Bounds[5], c);
+        Debug.DrawLine(box.Bounds[2], box.Bounds[3], c);
+        Debug.DrawLine(box.Bounds[2], box.Bounds[6], c);
+        Debug.DrawLine(box.Bounds[3], box.Bounds[7], c);
+        Debug.DrawLine(box.Bounds[4], box.Bounds[7], c);
+        Debug.DrawLine(box.Bounds[4], box.Bounds[5], c);
+        Debug.DrawLine(box.Bounds[5], box.Bounds[6], c);
+        Debug.DrawLine(box.Bounds[6], box.Bounds[7], c);
+
+        if (nodes[0] != null)
+        {
+            for (int i = 0; i < nodes.Length; i++)
+            {
+                nodes[i].Show();
+            }
+        }
     }
 }

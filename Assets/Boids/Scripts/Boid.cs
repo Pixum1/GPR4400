@@ -16,9 +16,6 @@ public class Boid : MonoBehaviour
     {
         boidManager = FindObjectOfType<BoidManager>();
 
-        if (col == null)
-            col = GetComponent<SphereCollider>();
-
         if (rb == null)
             rb = GetComponent<Rigidbody>();
 
@@ -63,24 +60,4 @@ public class Boid : MonoBehaviour
 
         return rayDirections;
     }
-
-    //#region Trigger stuff
-    //private void OnTriggerEnter(Collider _other)
-    //{
-    //    Boid b = _other.GetComponent<Boid>();
-    //    if (b != null && _other.isTrigger == false && IsInLayerMask(_other.gameObject, m_Settings.BoidLayer))
-    //        Neighbours.Add(b);
-    //}
-    //private void OnTriggerExit(Collider _other)
-    //{
-    //    Boid b = _other.GetComponent<Boid>();
-    //    if (b != null && _other.isTrigger == false && IsInLayerMask(_other.gameObject, m_Settings.BoidLayer))
-    //        Neighbours.Remove(b);
-    //}
-
-    //private bool IsInLayerMask(GameObject _go, LayerMask _layerMask)
-    //{
-    //    return (1 << _go.layer & _layerMask) != 0;
-    //}
-    //#endregion
 }

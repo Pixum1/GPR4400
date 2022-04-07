@@ -14,39 +14,42 @@ public class BoidManager : MonoBehaviour
 
     private void Start()
     {
-        octtree = new Octtree(0, new Box(50, 50, 50, transform.position));   
+        octtree = new Octtree(0, new Box(50, 50, 50, transform.position));
     }
 
     private void Update()
     {
+        octtree.Clear();
+
         for (int i = 0; i < Boids.Count; i++)
         {
-            octtree.Clear();
+            #region Octtree
+            Boids[i].Neighbours.Clear();
+            returnedObjects.Clear();
+
             octtree.Insert(Boids[i]);
 
-            returnedObjects.Clear();
             octtree.Retrieve(returnedObjects, Boids[i]);
 
-            Boids[i].Neighbours = returnedObjects;
+            for (int f = 0; f < returnedObjects.Count; f++)
+            {
+                Boid boidToCheck = returnedObjects[f];
+                if ((boidToCheck.transform.position - Boids[i].transform.position).sqrMagnitude <= Boids[i].m_Settings.BoidRadius * Boids[i].m_Settings.BoidRadius)
+                    if (boidToCheck.m_Settings.BoidLayer == Boids[i].m_Settings.BoidLayer)
+                        Boids[i].Neighbours.Add(returnedObjects[f]);
+            }
+            #endregion
 
-
-
-
+            #region Boid Settings
             Boids[i].transform.localScale = Vector3.one * Boids[i].m_Settings.Size;
-            Boids[i].col.radius = Boids[i].m_Settings.BoidRadius;
 
             Boids[i].transform.LookAt(Boids[i].transform.position + Boids[i].rb.velocity); //<- face rigidbody move direction
-
-            for (int j = 0; j < Boids[i].Neighbours.Count; j++)
-            {
-                Debug.DrawLine(Boids[i].transform.position, Boids[i].Neighbours[j].transform.position, Color.blue);
-            }
 
             if (rayDenseTemp != Boids[i].m_Settings.RayDensity)
                 Boids[i].rayDirections = Boids[i].RaySphere(Boids[i].m_Settings.RayDensity);
 
             rayDenseTemp = Boids[i].m_Settings.RayDensity;
-
+            #endregion
 
             #region Boid Behaviour and Obstacle Avoidance
             if (IsHeadingForObstacle(Boids[i]))
@@ -61,6 +64,7 @@ public class BoidManager : MonoBehaviour
             Boids[i].rb.velocity = Vector3.ClampMagnitude(Boids[i].rb.velocity, Boids[i].m_Settings.Speed * Time.deltaTime); //<- limit rigidbody velocity
             #endregion
         }
+
     }
 
 
@@ -155,4 +159,18 @@ public class BoidManager : MonoBehaviour
         return bestDir * _intensity;
     }
     #endregion
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blue;
+        for (int i = 0; i < Boids.Count; i++)
+        {
+            for (int n = 0; n < Boids[i].Neighbours.Count; n++)
+            {
+                Gizmos.DrawLine(Boids[i].transform.position, Boids[i].Neighbours[n].transform.position);
+            }
+        }
+        if (octtree != null)
+            octtree.Show();
+    }
 }
