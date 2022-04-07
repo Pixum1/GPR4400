@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d7619de4e2135b42b2db1a44e4c59d9, type: 3}
   m_Name: BoidSettings 2
   m_EditorClassIdentifier: 
-  m_MoveSpeed: 228
-  m_Size: 1.061
-  m_AlignmentIntensity: 1.5
+  m_MoveSpeed: 250
+  m_Size: 1.003
+  m_AlignmentIntensity: 2.41
   m_CohesionIntensity: 0.88
-  m_SeperationIntensity: 1.59
-  m_AvoidanceIntensity: 0.3
-  m_RayDensity: 2
-  m_BoidRadius: 5
-  m_AvoidanceRadius: 5
+  m_SeperationIntensity: 2
+  m_AvoidanceIntensity: 2.11
+  m_RayCount: 200
+  m_currentIntensity: 0.25
+  m_BoidRadius: 7
+  m_AvoidanceRadius: 10
   m_ObstacleLayer:
     serializedVersion: 2
     m_Bits: 5632

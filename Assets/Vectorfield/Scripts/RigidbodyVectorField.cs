@@ -19,10 +19,6 @@ public class RigidbodyVectorField : MonoBehaviour
 
          rb = GetComponent<Rigidbody>();
     }
-    private void Start()
-    {
-        rb.useGravity = false;
-    }
 
     private void Update()
     {

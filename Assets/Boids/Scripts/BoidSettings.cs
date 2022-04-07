@@ -14,7 +14,11 @@ public class BoidSettings : ScriptableObject
 
     [Header("Obstacle Avoidance")]
     [SerializeField, Range(0, 5)] private float m_AvoidanceIntensity;
-    [SerializeField, Range(1, 5)] private int m_RayDensity;
+    //[SerializeField, Range(1, 5)] private int m_RayDensity;
+    [SerializeField] private int m_RayCount;
+
+    [Header("Vectorfield")]
+    [SerializeField, Range(0, 5)] private float m_currentIntensity;
 
     [Header("Behaviour Radius")]
     [SerializeField] private float m_BoidRadius;
@@ -26,6 +30,7 @@ public class BoidSettings : ScriptableObject
 
 
     public float Size => m_Size;
+    public int RayCount => m_RayCount;
     public float Alignment => m_AlignmentIntensity;
     public float Cohesion => m_CohesionIntensity;
     public float Seperation => m_SeperationIntensity;
@@ -35,5 +40,6 @@ public class BoidSettings : ScriptableObject
     public float AvoidanceRadius => m_AvoidanceRadius;
     public LayerMask ObstacleLayer => m_ObstacleLayer;
     public float AvoidanceIntensity => m_AvoidanceIntensity;
-    public int RayDensity => m_RayDensity;
+    public float CurrentIntensity => m_currentIntensity;
+    //public int RayDensity => m_RayDensity;
 }

@@ -176,7 +176,7 @@ public class VectorField : MonoBehaviour
         return average;
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.white;
         Gizmos.DrawWireCube(this.transform.position, Vector3.one * mSize);

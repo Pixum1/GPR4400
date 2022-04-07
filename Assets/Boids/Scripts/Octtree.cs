@@ -49,78 +49,12 @@ public class Octtree
 
     }
 
-    private int FindPositionInOctree(Vector3 _position)
-    {
-        bool isInTopQuadrant = _position.y > box.Center.y && _position.y < (box.Center.y + box.Size.y / 2);
-        bool isInBottomQuadrant = _position.y > (box.Center.y - box.Size.y / 2) && _position.y < box.Center.y;
-
-        bool isInLeftQuadrant = _position.x > (box.Center.x - box.Size.x / 2f) && _position.x < box.Center.x;
-        bool isInRightQuadrant = _position.x > box.Center.x && _position.x < (box.Center.x + box.Size.x / 2f);
-
-        bool isInFrontQuadrant = _position.z > (box.Center.z - box.Size.z / 2f) && _position.z < box.Center.z;
-        bool isInBackQuadrant = _position.z > box.Center.z && _position.z < (box.Center.z + box.Size.z / 2f);
-
-        //-- Get Location of given position within this node
-        if (isInBottomQuadrant)
-        {
-            if (isInLeftQuadrant)
-            {
-                if (isInFrontQuadrant)
-                {
-                    return 0;
-                }
-                else if (isInBackQuadrant)
-                {
-                    return 3;
-                }
-            }
-            else if (isInRightQuadrant)
-            {
-                if (isInFrontQuadrant)
-                {
-                    return 1;
-                }
-                else if (isInBackQuadrant)
-                {
-                    return 2;
-                }
-            }
-        }
-        else if (isInTopQuadrant)
-        {
-            if (isInLeftQuadrant)
-            {
-                if (isInFrontQuadrant)
-                {
-                    return 4;
-                }
-                else if (isInBackQuadrant)
-                {
-                    return 7;
-                }
-            }
-            else if (isInRightQuadrant)
-            {
-                if (isInFrontQuadrant)
-                {
-                    return 5;
-                }
-                else if (isInBackQuadrant)
-                {
-                    return 6;
-                }
-            }
-        }
-
-        return -1; //<- no node / return to parent node
-    }
-
     public void Insert(Boid _boid)
     {
         //--if node is not a leaf node
         if (nodes[0] != null)
         {
-            int index = FindPositionInOctree(_boid.transform.position); //<- Convert boid position into index of quadtree node
+            int index = box.GetQuadrant(_boid.transform.position); //<- Convert boid position into index of quadtree node
 
             //-- if boid can be put into one specific node
             if (index != -1)
@@ -142,7 +76,7 @@ public class Octtree
 
             for (int i = 0; i < objects.Count; i++)
             {
-                int index = FindPositionInOctree(objects[i].transform.position); //<- Convert boid position into index of quadtree node
+                int index = box.GetQuadrant(objects[i].transform.position); //<- Convert boid position into index of quadtree node
                 //-- if object can be put into one specific node
                 if (index != -1)
                 {
@@ -155,7 +89,7 @@ public class Octtree
 
     public List<Boid> Retrieve(List<Boid> retrievedObjects, Boid _boid)
     {
-        int index = FindPositionInOctree(_boid.transform.position); //<- Find Position of given Boid
+        int index = box.GetQuadrant(_boid.transform.position); //<- Find Position of given Boid
 
         //-- Retrieve all objects of all subnodes containing this Boid
         if (index != -1 && nodes[0] != null)
@@ -169,26 +103,15 @@ public class Octtree
 
     public void Show()
     {
-        Color c = Color.green;
-        Debug.DrawLine(box.Bounds[0], box.Bounds[1], c);
-        Debug.DrawLine(box.Bounds[0], box.Bounds[3], c);
-        Debug.DrawLine(box.Bounds[0], box.Bounds[4], c);
-        Debug.DrawLine(box.Bounds[1], box.Bounds[2], c);
-        Debug.DrawLine(box.Bounds[1], box.Bounds[5], c);
-        Debug.DrawLine(box.Bounds[2], box.Bounds[3], c);
-        Debug.DrawLine(box.Bounds[2], box.Bounds[6], c);
-        Debug.DrawLine(box.Bounds[3], box.Bounds[7], c);
-        Debug.DrawLine(box.Bounds[4], box.Bounds[7], c);
-        Debug.DrawLine(box.Bounds[4], box.Bounds[5], c);
-        Debug.DrawLine(box.Bounds[5], box.Bounds[6], c);
-        Debug.DrawLine(box.Bounds[6], box.Bounds[7], c);
+        Color c = new Color(0, 0, 0, 0);
+        if (objects.Count > 0)
+            c = new Color(0, 1, 0, ((objects.Count / 100f) * maxObjects) - .25f);
+
+        if (level != 0)
+            box.Show(c);
 
         if (nodes[0] != null)
-        {
             for (int i = 0; i < nodes.Length; i++)
-            {
                 nodes[i].Show();
-            }
-        }
     }
 }
