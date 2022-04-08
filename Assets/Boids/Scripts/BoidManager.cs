@@ -26,47 +26,53 @@ public class BoidManager : MonoBehaviour
 
         for (int i = 0; i < Boids.Count; i++)
         {
-            #region Octtree
-            Boids[i].Neighbours.Clear();
+            Boid b = Boids[i];
+
+            #region Octtree / Neighbour check
+            b.Neighbours.Clear();
+
+            octtree.Insert(b);
+
             returnedObjects.Clear();
-
-            octtree.Insert(Boids[i]);
-
-            octtree.Retrieve(returnedObjects, Boids[i]);
+            octtree.Retrieve(returnedObjects, b);
 
             for (int f = 0; f < returnedObjects.Count; f++)
             {
                 Boid boidToCheck = returnedObjects[f];
-                if ((boidToCheck.transform.position - Boids[i].transform.position).sqrMagnitude <= Boids[i].m_Settings.BoidRadius * Boids[i].m_Settings.BoidRadius)
-                    if (boidToCheck.m_Settings.BoidLayer == Boids[i].m_Settings.BoidLayer)
-                        Boids[i].Neighbours.Add(returnedObjects[f]);
+
+                if ((boidToCheck.transform.position - b.transform.position).sqrMagnitude <= b.m_Settings.BoidRadius * b.m_Settings.BoidRadius)
+                {
+                    
+                    if (boidToCheck.m_Settings.BoidLayer == b.m_Settings.BoidLayer)
+                        b.Neighbours.Add(returnedObjects[f]);
+                }
             }
             #endregion
 
             #region Boid Settings
-            Boids[i].transform.localScale = Vector3.one * Boids[i].m_Settings.Size;
+            b.transform.localScale = Vector3.one * b.m_Settings.Size;
 
-            Boids[i].transform.LookAt(Boids[i].transform.position + Boids[i].rb.velocity); //<- face rigidbody move direction
+            b.transform.LookAt(b.transform.position + b.rb.velocity); //<- face rigidbody move direction
             #endregion
 
             #region Boid Behaviour and Obstacle Avoidance
-            if (IsHeadingForObstacle(Boids[i]))
+            if (IsHeadingForObstacle(b))
             {
                 //Boids[i].rb.velocity += ApplyObstacleAvoidance(Boids[i].m_Settings.AvoidanceIntensity * (Boids[i].m_Settings.Speed * Time.deltaTime), Boids[i].m_Settings.AvoidanceRadius, Boids[i]); //<- apply obstacle avoidance
-                Boids[i].rb.velocity += ApplyObstacleAvoidance(Boids[i].m_Settings.AvoidanceIntensity * (Boids[i].m_Settings.Speed * Time.deltaTime), Boids[i]); //<- apply obstacle avoidance
+                b.rb.velocity += ApplyObstacleAvoidance(b.m_Settings.AvoidanceIntensity * (b.m_Settings.Speed * Time.deltaTime), b); //<- apply obstacle avoidance
             }
 
             if (vField != null)
             {
                 Vector3 vectorForce = vField.GetForceDirection(transform.position);
-                Boids[i].rb.velocity += vectorForce.normalized * Boids[i].m_Settings.CurrentIntensity;
+                b.rb.velocity += vectorForce.normalized * b.m_Settings.CurrentIntensity;
             }
 
-            Boids[i].rb.velocity += ApplyAlignment(Boids[i].m_Settings.Alignment, Boids[i]); //<- apply alignment
-            Boids[i].rb.velocity += ApplyCohesion(Boids[i].m_Settings.Cohesion, Boids[i]); //<- apply cohesion
-            Boids[i].rb.velocity += ApplySeperation(Boids[i].m_Settings.Seperation, Boids[i]); //<- apply seperation
+            b.rb.velocity += ApplyAlignment(b.m_Settings.Alignment, b); //<- apply alignment
+            b.rb.velocity += ApplyCohesion(b.m_Settings.Cohesion, b); //<- apply cohesion
+            b.rb.velocity += ApplySeperation(b.m_Settings.Seperation, b); //<- apply seperation
 
-            Boids[i].rb.velocity = Vector3.ClampMagnitude(Boids[i].rb.velocity, Boids[i].m_Settings.Speed * Time.deltaTime); //<- limit rigidbody velocity
+            b.rb.velocity = Vector3.ClampMagnitude(b.rb.velocity, b.m_Settings.Speed * Time.deltaTime); //<- limit rigidbody velocity
             #endregion
         }
 
@@ -84,7 +90,7 @@ public class BoidManager : MonoBehaviour
 
         for (int i = 0; i < _boid.Neighbours.Count; i++)
         {
-            alignment += _boid.Neighbours[i].rb.velocity.normalized;
+            alignment += _boid.Neighbours[i].rb.velocity;
         }
 
         alignment /= _boid.Neighbours.Count;
@@ -123,7 +129,7 @@ public class BoidManager : MonoBehaviour
 
         seperation /= _boid.Neighbours.Count;
 
-        return seperation.normalized * _intensity;
+        return seperation * _intensity;
     }
 
     #endregion

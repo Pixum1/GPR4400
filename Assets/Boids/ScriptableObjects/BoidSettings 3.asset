@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: BoidSettings 3
   m_EditorClassIdentifier: 
   m_MoveSpeed: 250
-  m_Size: 1.003
-  m_AlignmentIntensity: 2.41
-  m_CohesionIntensity: 0.88
-  m_SeperationIntensity: 2
+  m_Size: 0.983
+  m_AlignmentIntensity: 3.64
+  m_CohesionIntensity: 1.71
+  m_SeperationIntensity: 2.16
   m_AvoidanceIntensity: 2.11
   m_RayCount: 200
-  m_currentIntensity: 0.25
+  m_currentIntensity: 0.1
   m_BoidRadius: 7
   m_AvoidanceRadius: 10
   m_ObstacleLayer:
