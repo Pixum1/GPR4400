@@ -26,6 +26,7 @@ public class BoidManager : MonoBehaviour
 
         for (int i = 0; i < Boids.Count; i++)
         {
+
             Boid b = Boids[i];
 
             #region Octtree / Neighbour check
@@ -42,7 +43,7 @@ public class BoidManager : MonoBehaviour
 
                 if ((boidToCheck.transform.position - b.transform.position).sqrMagnitude <= b.m_Settings.BoidRadius * b.m_Settings.BoidRadius)
                 {
-                    
+
                     if (boidToCheck.m_Settings.BoidLayer == b.m_Settings.BoidLayer)
                         b.Neighbours.Add(returnedObjects[f]);
                 }
@@ -56,6 +57,7 @@ public class BoidManager : MonoBehaviour
             #endregion
 
             #region Boid Behaviour and Obstacle Avoidance
+            //b.rb.velocity += Random.insideUnitSphere* 8;
             if (IsHeadingForObstacle(b))
             {
                 //Boids[i].rb.velocity += ApplyObstacleAvoidance(Boids[i].m_Settings.AvoidanceIntensity * (Boids[i].m_Settings.Speed * Time.deltaTime), Boids[i].m_Settings.AvoidanceRadius, Boids[i]); //<- apply obstacle avoidance
@@ -66,6 +68,14 @@ public class BoidManager : MonoBehaviour
             {
                 Vector3 vectorForce = vField.GetForceDirection(transform.position);
                 b.rb.velocity += vectorForce.normalized * b.m_Settings.CurrentIntensity;
+            }
+
+            if (b.transform.localPosition.y != b.m_Settings.TargetHeight)
+            {
+                if (b.transform.localPosition.y > b.m_Settings.TargetHeight)
+                    b.rb.velocity -= Vector3.up * b.m_Settings.TargetHeightIntensity;
+                else
+                    b.rb.velocity += Vector3.up * b.m_Settings.TargetHeightIntensity;
             }
 
             b.rb.velocity += ApplyAlignment(b.m_Settings.Alignment, b); //<- apply alignment
@@ -146,6 +156,10 @@ public class BoidManager : MonoBehaviour
 
     private Vector3 ApplyObstacleAvoidance(float _intensity, Boid _boid)
     {
+        Physics.Raycast(_boid.transform.position, _boid.rayDirections[0], out RaycastHit hitInfo,_boid.m_Settings.ObstacleLayer);
+        if(hitInfo.distance > 0)
+            _intensity /= hitInfo.distance;
+
         for (int i = 0; i < _boid.rayDirections.Length; i++)
         {
             Vector3 dir = _boid.transform.TransformDirection(_boid.rayDirections[i]);
@@ -201,5 +215,7 @@ public class BoidManager : MonoBehaviour
         }
         if (octtree != null)
             octtree.Show();
+
+        Gizmos.DrawWireCube(transform.position, Vector3.one * boxSize);
     }
 }

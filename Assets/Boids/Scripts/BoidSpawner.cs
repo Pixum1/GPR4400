@@ -16,13 +16,13 @@ public class BoidSpawner : MonoBehaviour
         for (int i = 0; i < m_BoidAmount; i++)
         {
             Boid g = Instantiate(m_BoidPrefab, transform);
-            g.transform.position += RandomPointInBox(transform.position, Vector3.one * m_SpawnRadius);
+            g.transform.position += RandomPointInBox(Vector3.one * m_SpawnRadius);
         }
     }
-    private Vector3 RandomPointInBox(Vector3 center, Vector3 size)
+    private Vector3 RandomPointInBox(Vector3 size)
     {
 
-        return center + new Vector3(
+        return new Vector3(
            (Random.value - 0.5f) * size.x,
            (Random.value - 0.5f) * size.y,
            (Random.value - 0.5f) * size.z

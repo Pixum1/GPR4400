@@ -10,7 +10,6 @@ public class Boid : MonoBehaviour
     [HideInInspector] public SphereCollider col;
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public Vector3[] rayDirections;
-    private FibonacciSphere sphere;
     [SerializeField] public BoidSettings m_Settings;
 
     private void Awake()

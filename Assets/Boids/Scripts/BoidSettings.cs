@@ -11,6 +11,7 @@ public class BoidSettings : ScriptableObject
     [SerializeField,Range(0,5)] private float m_AlignmentIntensity;
     [SerializeField, Range(0, 5)] private float m_CohesionIntensity;
     [SerializeField, Range(0, 5)] private float m_SeperationIntensity;
+    [SerializeField, Range(0, 5)] private float m_targetHeightIntensity;
 
     [Header("Obstacle Avoidance")]
     [SerializeField, Range(0, 5)] private float m_AvoidanceIntensity;
@@ -23,6 +24,7 @@ public class BoidSettings : ScriptableObject
     [Header("Behaviour Radius")]
     [SerializeField] private float m_BoidRadius;
     [SerializeField] private float m_AvoidanceRadius;
+    [SerializeField] private float m_targetHeight;
 
     [Header("Layer Masks")]
     [SerializeField] private LayerMask m_ObstacleLayer;
@@ -41,5 +43,7 @@ public class BoidSettings : ScriptableObject
     public LayerMask ObstacleLayer => m_ObstacleLayer;
     public float AvoidanceIntensity => m_AvoidanceIntensity;
     public float CurrentIntensity => m_currentIntensity;
+    public float TargetHeight => m_targetHeight;
+    public float TargetHeightIntensity => m_targetHeightIntensity;
     //public int RayDensity => m_RayDensity;
 }
