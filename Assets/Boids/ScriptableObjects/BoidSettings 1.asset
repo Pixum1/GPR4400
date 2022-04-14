@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d7619de4e2135b42b2db1a44e4c59d9, type: 3}
   m_Name: BoidSettings 1
   m_EditorClassIdentifier: 
-  m_MoveSpeed: 202
+  m_MoveSpeed: 393
   m_Size: 0.73
   m_AlignmentIntensity: 1.59
-  m_CohesionIntensity: 1.01
-  m_SeperationIntensity: 2.31
+  m_CohesionIntensity: 1.38
+  m_SeperationIntensity: 2.17
   m_targetHeightIntensity: 2.87
   m_AvoidanceIntensity: 1.96
   m_RayCount: 200

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.4464668, g: 0.49628925, b: 0.5747511, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 226e3113a7054c94b97fa8b49482fc42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BoidAmount: 400
+  m_BoidAmount: 200
   m_BoidPrefab: {fileID: 2814136426653296061, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
   m_SpawnRadius: 50
 --- !u!4 &1088205791
@@ -369,7 +369,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1414095453}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
@@ -380,7 +380,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 28fe8af34864609498f031240d0d0b07, type: 2}
+  - {fileID: 2100000, guid: 67a7a141927aeb7408990cac5aae26ba, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -418,8 +418,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1414095453}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 60, y: 98.4, z: 80.2}
-  m_LocalScale: {x: 10.512967, y: 0.7008645, z: 10.512967}
+  m_LocalPosition: {x: 54.4, y: 97.6, z: 83.1}
+  m_LocalScale: {x: 11.8374, y: 1.9729, z: 11.8374}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -510,13 +510,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1447094221}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.4105661, y: -0.23427527, z: 0.11001083, w: 0.8743273}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 50.308, y: -30, z: 0}
 --- !u!1 &1588814299
 GameObject:
   m_ObjectHideFlags: 0

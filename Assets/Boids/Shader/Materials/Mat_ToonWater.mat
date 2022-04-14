@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Mat_ToonWater
+  m_Shader: {fileID: -6465566751694194690, guid: 8ac1f449bb575d040bd48851fd93a859, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_b4404d23fdd54937a3e9d49315494481:
+        m_Texture: {fileID: 2800000, guid: c847748c93a6b644192eeca7967603c4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalFromTexture_4a87d9188e9844f5a4e659ecbfbad5f7_Texture_0:
+        m_Texture: {fileID: 2800000, guid: c847748c93a6b644192eeca7967603c4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_9784d2a70a414c4a84560236adc4be5a_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 7c8ae91a6182a2e429edf09577c6789a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_049f3953983d477cb367f37c93213dec: 0.83
+    - Vector1_6bcc1f9858694b59b02ca198183c20c9: 9.19
+    - Vector1_770679d5d9e84ce8b6739b1792759623: 86
+    - Vector1_992863e89df546dca3cea4ce12054974: 0.44
+    - Vector1_d63c8c6db9d54f6fa523fb8924ef875c: 0.02
+    - Vector1_ec29ac7930694bb881200b96a0063fb2: 1.4
+    m_Colors:
+    - Color_340e64ecdcf14068b25894a258e4fcde: {r: 0.33521718, g: 0.8514048, b: 0.8773585, a: 0}
+    - Color_90b44f28756a4d9f945c8bdd35d1cecb: {r: 0.003921565, g: 0.077818915, b: 0.32156864, a: 0}
+  m_BuildTextureStacks: []

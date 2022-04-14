@@ -148,7 +148,7 @@ public class BoidManager : MonoBehaviour
 
     private bool IsHeadingForObstacle(Boid _boid)
     {
-        if (Physics.OverlapSphere(_boid.transform.position, _boid.m_Settings.AvoidanceRadius, _boid.m_Settings.ObstacleLayer).Length > 0)
+        if (Physics.SphereCast(_boid.transform.position, .25f, transform.forward, out RaycastHit hit, _boid.m_Settings.AvoidanceRadius, _boid.m_Settings.ObstacleLayer))
             return true;
         else
             return false;
@@ -156,8 +156,8 @@ public class BoidManager : MonoBehaviour
 
     private Vector3 ApplyObstacleAvoidance(float _intensity, Boid _boid)
     {
-        Physics.Raycast(_boid.transform.position, _boid.rayDirections[0], out RaycastHit hitInfo,_boid.m_Settings.ObstacleLayer);
-        if(hitInfo.distance > 0)
+        Physics.Raycast(_boid.transform.position, _boid.rayDirections[0], out RaycastHit hitInfo, _boid.m_Settings.ObstacleLayer);
+        if (hitInfo.distance > 0)
             _intensity /= hitInfo.distance;
 
         for (int i = 0; i < _boid.rayDirections.Length; i++)
