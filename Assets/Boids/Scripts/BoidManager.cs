@@ -70,9 +70,10 @@ public class BoidManager : MonoBehaviour
                 b.rb.velocity += vectorForce.normalized * b.m_Settings.CurrentIntensity;
             }
 
-            if (b.transform.localPosition.y != b.m_Settings.TargetHeight)
+            float targetHeight = boxSize/2 - b.m_Settings.TargetHeight;
+            if (b.transform.localPosition.y != targetHeight)
             {
-                if (b.transform.localPosition.y > b.m_Settings.TargetHeight)
+                if (b.transform.localPosition.y > targetHeight)
                     b.rb.velocity -= Vector3.up * b.m_Settings.TargetHeightIntensity;
                 else
                     b.rb.velocity += Vector3.up * b.m_Settings.TargetHeightIntensity;
@@ -90,7 +91,6 @@ public class BoidManager : MonoBehaviour
 
 
     #region Boid behaviour
-
     private Vector3 ApplyAlignment(float _intensity, Boid _boid)
     {
         Vector3 alignment = Vector3.zero;
@@ -166,41 +166,12 @@ public class BoidManager : MonoBehaviour
             Ray r = new Ray(_boid.transform.position, dir);
             if (!Physics.SphereCast(r, .2f, _boid.m_Settings.AvoidanceRadius, _boid.m_Settings.ObstacleLayer))
             {
-                //Debug.DrawRay(_boid.transform.position, dir, Color.green);
                 return dir * _intensity;
             }
-            //else
-            //    Debug.DrawRay(_boid.transform.position, dir, Color.red);
         }
 
         return _boid.transform.forward;
     }
-
-    //private Vector3 ApplyObstacleAvoidance(float _intensity, float _rayLength, Boid _boid)
-    //{
-    //    Vector3 bestDir = Vector3.zero;
-    //    float bestDirCount = 0; //<- count of all directions with no obstacle
-
-    //    for (int i = 0; i < _boid.rayDirections.Length; i++)
-    //    {
-    //        Vector3 dir = _boid.rayDirections[i] * _rayLength;
-    //        Ray r = new Ray(_boid.transform.position, dir);
-
-    //        //- All directions with no obstacle get added up
-    //        if (!Physics.Raycast(r, _boid.m_Settings.AvoidanceRadius, _boid.m_Settings.ObstacleLayer))
-    //        {
-    //            bestDir += dir;
-    //            bestDirCount++;
-    //        }
-    //        //else
-    //        //Debug.DrawRay(_boid.transform.position, dir, Color.red);
-    //    }
-
-    //    if (bestDirCount > 0)
-    //        bestDir /= bestDirCount; //<- get average of all directions
-
-    //    return bestDir * _intensity;
-    //}
     #endregion
 
     private void OnDrawGizmosSelected()
