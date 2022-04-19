@@ -139,6 +139,7 @@ public class VectorField : MonoBehaviour
         Vector3Int newPos = GetPositionInVectorField(_position);
         return GetAverageNeighbourhood(mResolution, newPos.x, newPos.y, newPos.z, true);
     }
+
     private Vector3 GetAverageNeighbourhood(int _currRes, int _x, int _y, int _z, bool _countSelf = false)
     {
         Vector3 average = Vector3.zero;

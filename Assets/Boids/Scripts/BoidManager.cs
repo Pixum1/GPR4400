@@ -24,6 +24,11 @@ public class BoidManager : MonoBehaviour
     {
         octtree.Clear();
 
+        for (int b = 0; b < Boids.Count; b++)
+        {
+            octtree.Insert(Boids[b]);
+        }
+
         for (int i = 0; i < Boids.Count; i++)
         {
 
@@ -31,8 +36,6 @@ public class BoidManager : MonoBehaviour
 
             #region Octtree / Neighbour check
             b.Neighbours.Clear();
-
-            octtree.Insert(b);
 
             returnedObjects.Clear();
             octtree.Retrieve(returnedObjects, b);
@@ -91,53 +94,53 @@ public class BoidManager : MonoBehaviour
 
 
     #region Boid behaviour
-    private Vector3 ApplyAlignment(float _intensity, Boid _boid)
+    private Vector3 ApplyAlignment(float _intensity, Boid _b)
     {
         Vector3 alignment = Vector3.zero;
 
-        if (_boid.Neighbours.Count == 0)
+        if (_b.Neighbours.Count == 0)
             return Vector3.zero;
 
-        for (int i = 0; i < _boid.Neighbours.Count; i++)
+        for (int i = 0; i < _b.Neighbours.Count; i++)
         {
-            alignment += _boid.Neighbours[i].rb.velocity;
+            alignment += _b.Neighbours[i].rb.velocity;
         }
 
-        alignment /= _boid.Neighbours.Count;
+        alignment /= _b.Neighbours.Count;
 
         return alignment * _intensity;
     }
 
-    private Vector3 ApplyCohesion(float _intensity, Boid _boid)
+    private Vector3 ApplyCohesion(float _intensity, Boid _b)
     {
         Vector3 cohesion = Vector3.zero;
 
-        if (_boid.Neighbours.Count == 0)
+        if (_b.Neighbours.Count == 0)
             return Vector3.zero;
 
-        for (int i = 0; i < _boid.Neighbours.Count; i++)
+        for (int i = 0; i < _b.Neighbours.Count; i++)
         {
-            cohesion += _boid.Neighbours[i].transform.position - _boid.transform.position;
+            cohesion += _b.Neighbours[i].transform.position - _b.transform.position;
         }
 
-        cohesion /= _boid.Neighbours.Count;
+        cohesion /= _b.Neighbours.Count;
 
         return cohesion * _intensity;
     }
 
-    private Vector3 ApplySeperation(float _intensity, Boid _boid)
+    private Vector3 ApplySeperation(float _intensity, Boid _b)
     {
         Vector3 seperation = Vector3.zero;
 
-        if (_boid.Neighbours.Count == 0)
+        if (_b.Neighbours.Count == 0)
             return Vector3.zero;
 
-        for (int i = 0; i < _boid.Neighbours.Count; i++)
+        for (int i = 0; i < _b.Neighbours.Count; i++)
         {
-            seperation -= _boid.Neighbours[i].transform.position - _boid.transform.position;
+            seperation -= _b.Neighbours[i].transform.position - _b.transform.position;
         }
 
-        seperation /= _boid.Neighbours.Count;
+        seperation /= _b.Neighbours.Count;
 
         return seperation * _intensity;
     }
@@ -148,7 +151,7 @@ public class BoidManager : MonoBehaviour
 
     private bool IsHeadingForObstacle(Boid _boid)
     {
-        if (Physics.SphereCast(_boid.transform.position, .25f, transform.forward, out RaycastHit hit, _boid.m_Settings.AvoidanceRadius, _boid.m_Settings.ObstacleLayer))
+        if (Physics.SphereCast(_boid.transform.position, .25f, _boid.rb.velocity.normalized, out RaycastHit hit, _boid.m_Settings.AvoidanceRadius, _boid.m_Settings.ObstacleLayer))
             return true;
         else
             return false;

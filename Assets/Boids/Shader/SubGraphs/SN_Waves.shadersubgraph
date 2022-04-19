@@ -860,7 +860,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "6c7adaa702404df284d47b1cde1bfcd6",
     "m_Id": 0,
-    "m_DisplayName": "WaveScale",
+    "m_DisplayName": "WaveResolution",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",

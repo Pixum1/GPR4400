@@ -1463,8 +1463,8 @@
     "m_Theme": 0,
     "m_Position": {
         "serializedVersion": "2",
-        "x": 812.0,
-        "y": 321.0,
+        "x": 910.0,
+        "y": 295.0,
         "width": 200.0,
         "height": 100.0
     },
@@ -2041,10 +2041,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 841.0000610351563,
-            "y": 175.0000457763672,
+            "x": 903.0,
+            "y": 158.0,
             "width": 130.0,
-            "height": 117.99999237060547
+            "height": 118.0
         }
     },
     "m_Slots": [
@@ -2131,16 +2131,16 @@
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
     "m_ObjectId": "6381fdfc3d404f6f87dd4a86a5b105f9",
-    "m_Title": "If Water texture should be used Apply non transparent textures",
+    "m_Title": "If Water texture should be used Apply non transparent parts of a texture",
     "m_Content": "Write something here",
     "m_TextSize": 0,
     "m_Theme": 0,
     "m_Position": {
         "serializedVersion": "2",
-        "x": 32.0,
-        "y": 136.0,
-        "width": 172.0,
-        "height": 124.0
+        "x": 26.0,
+        "y": 128.0,
+        "width": 188.0,
+        "height": 128.0
     },
     "m_Group": {
         "m_Id": ""
@@ -2734,7 +2734,7 @@
             "m_Id": "47e6a92427ee490385a3833fc8a63862"
         },
         {
-            "m_Id": "e113f24b34784cd49f95937daf47de1e"
+            "m_Id": "bb272032465e4f329462e34c966c42b8"
         }
     ],
     "synonyms": [],
@@ -2751,7 +2751,8 @@
         "6f286ff2-e092-467f-ad22-e105887665ce",
         "5bbf78c6-1e24-4b2b-9453-299deb2db66e",
         "1acb30fb-1036-429a-89d2-e54a2a06284f",
-        "4db3ac19-745d-4739-ac8e-e14a5b4dc6a7"
+        "4db3ac19-745d-4739-ac8e-e14a5b4dc6a7",
+        "f3fc63b2-a8bb-47ba-a1ee-55fba7276d2b"
     ],
     "m_PropertyIds": [
         1466177910,
@@ -2759,7 +2760,8 @@
         1857694019,
         1822110595,
         -268602834,
-        -655430777
+        -655430777,
+        239543331
     ]
 }
 
@@ -3482,6 +3484,21 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "bb272032465e4f329462e34c966c42b8",
+    "m_Id": 1,
+    "m_DisplayName": "Out",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 2,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
     "m_ObjectId": "bf5abb7d865847969ebf90a7e891b9b8",
     "m_Id": 2,
@@ -3863,8 +3880,8 @@
     "m_ObjectId": "daccef3995fa446a86d06449b6bb23a4",
     "m_Title": "Depth Based Foam",
     "m_Position": {
-        "x": -354.000244140625,
-        "y": 985.0000610351563
+        "x": -354.0,
+        "y": 985.0
     }
 }
 
@@ -3993,21 +4010,6 @@
     "m_PropertyIds": [
         2060815940
     ]
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
-    "m_ObjectId": "e113f24b34784cd49f95937daf47de1e",
-    "m_Id": 1,
-    "m_DisplayName": "Out_Vector1",
-    "m_SlotType": 1,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "OutVector1",
-    "m_StageCapability": 2,
-    "m_Value": 0.0,
-    "m_DefaultValue": 0.0,
-    "m_Labels": []
 }
 
 {
