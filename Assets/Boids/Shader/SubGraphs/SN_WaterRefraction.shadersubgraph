@@ -872,7 +872,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
     "m_ObjectId": "d8f0f5a224594007a8a87d40d078148c",
     "m_Id": 34173369,
-    "m_DisplayName": "Speed",
+    "m_DisplayName": "Offset",
     "m_SlotType": 0,
     "m_Hidden": false,
     "m_ShaderOutputName": "Vector2_fb0175e84dac4b16ac7f8dac62649582",
