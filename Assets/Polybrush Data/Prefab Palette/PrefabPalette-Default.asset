@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PrefabPalette-Default
   m_EditorClassIdentifier: 
   prefabs:
-  - gameObject: {fileID: 3416262254594730016, guid: 8d3d952d417d8614db24109cab8b2e42, type: 3}
+  - gameObject: {fileID: 802288017156220874, guid: 7043639a5844e8644aabc1d97611e4fd, type: 3}
     settings:
-      m_Strength: 56.32353
+      m_Strength: 50
       m_RotationRangeMin: {x: 0, y: 0, z: 0}
       m_RotationRangeMax: {x: 0, y: 0, z: 0}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
