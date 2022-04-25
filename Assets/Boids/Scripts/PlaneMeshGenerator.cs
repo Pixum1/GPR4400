@@ -19,12 +19,7 @@ public class PlaneMeshGenerator : MonoBehaviour
     [SerializeField]
     private Material m_Material;
 
-    private void Start()
-    {
-        CreateQuad();
-    }
-
-    private void CreateQuad()
+    public void CreatePlane()
     {
         #region Adding Components
         MeshRenderer meshRen = this.gameObject.AddComponent<MeshRenderer>();
@@ -52,7 +47,7 @@ public class PlaneMeshGenerator : MonoBehaviour
                 //Vector3 noisePos = planePos + Vector3.up * Mathf.PerlinNoise(noiseValuePos.x, noiseValuePos.y) * m_AnimNoiseStrength.Evaluate(percent.x);
                 Vector3 noisePos = planePos + Vector3.up * Mathf.PerlinNoise(noiseValuePos.x, noiseValuePos.y) * m_NoiseStrength;
 
-                vertices[i] = noisePos;
+                vertices[i] = planePos;
 
                 if (x != m_Resolution - 1 && y != m_Resolution - 1)
                 {
