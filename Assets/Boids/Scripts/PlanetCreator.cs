@@ -12,16 +12,16 @@ public class PlanetCreator : MonoBehaviour
 
     [SerializeField]
     private Material m_Material;
-    [SerializeField, Range(0,5)]
+    [SerializeField, Range(0, 5)]
     private int m_Subdivision;
     [SerializeField]
     private float m_Radius = 1;
 
     private void OnValidate()
     {
-        if(m_Renderer == null)
+        if (m_Renderer == null)
             m_Renderer = GetComponent<MeshRenderer>();
-        if(m_Filter == null)
+        if (m_Filter == null)
             m_Filter = GetComponent<MeshFilter>();
 
         CreateSphere(m_Subdivision);
@@ -38,6 +38,7 @@ public class PlanetCreator : MonoBehaviour
 
         Vector3[] vertices = new Vector3[vertexCount];
         Vector3[] normals = new Vector3[vertexCount];
+        Vector2[] uvs = new Vector2[vertexCount];
 
         for (int i = 0; i < m_Polygons.Count; i++)
         {
@@ -54,9 +55,10 @@ public class PlanetCreator : MonoBehaviour
             normals[i * 3 + 0] = m_Vertices[polygon.Vertices[0]];
             normals[i * 3 + 1] = m_Vertices[polygon.Vertices[1]];
             normals[i * 3 + 2] = m_Vertices[polygon.Vertices[2]];
+
         }
 
-        for (int v = 0; v < vertices.Length; v++)
+        for (int v = 0; v < vertexCount; v++)
         {
             vertices[v] *= m_Radius;
         }
@@ -66,7 +68,6 @@ public class PlanetCreator : MonoBehaviour
 
         mesh.vertices = vertices;
         mesh.normals = normals;
-
         mesh.SetTriangles(indices, 0);
 
         m_Filter.sharedMesh = mesh;
@@ -117,7 +118,7 @@ public class PlanetCreator : MonoBehaviour
 
     private void Subdivide(int _subdivisions)
     {
-        var midPointCache = new Dictionary<int,int>();
+        var midPointCache = new Dictionary<int, int>();
 
         for (int i = 0; i < _subdivisions; i++)
         {
@@ -134,8 +135,8 @@ public class PlanetCreator : MonoBehaviour
 
                 newPolys.Add(new Polygon(a, ab, ca));
                 newPolys.Add(new Polygon(b, bc, ab));
-                newPolys.Add(new Polygon(c,ca,bc));
-                newPolys.Add(new Polygon(ab,bc,ca));
+                newPolys.Add(new Polygon(c, ca, bc));
+                newPolys.Add(new Polygon(ab, bc, ca));
             }
 
             m_Polygons = newPolys;
@@ -149,7 +150,7 @@ public class PlanetCreator : MonoBehaviour
         int key = (smallIndex << 16) + largeIndex;
 
         int returnValue;
-        if(_cache.TryGetValue(key, out returnValue))
+        if (_cache.TryGetValue(key, out returnValue))
             return returnValue;
 
         Vector3 p1 = m_Vertices[_indexA];
