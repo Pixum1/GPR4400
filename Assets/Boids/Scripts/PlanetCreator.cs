@@ -14,8 +14,6 @@ public class PlanetCreator : MonoBehaviour
     private Material m_Material;
     [SerializeField, Range(0, 5)]
     private int m_Subdivision;
-    [SerializeField]
-    private float m_Radius = 1;
 
     private void OnValidate()
     {
@@ -56,11 +54,6 @@ public class PlanetCreator : MonoBehaviour
             normals[i * 3 + 1] = m_Vertices[polygon.Vertices[1]];
             normals[i * 3 + 2] = m_Vertices[polygon.Vertices[2]];
 
-        }
-
-        for (int v = 0; v < vertexCount; v++)
-        {
-            vertices[v] *= m_Radius;
         }
 
         Mesh mesh = new Mesh();
