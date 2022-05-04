@@ -5,27 +5,39 @@ using UnityEngine;
 public class PlaneMeshGenerator : MonoBehaviour
 {
     [SerializeField]
-    private float m_Scale;
+    private float m_Scale = 1;
     [SerializeField, Range(2, 256)]
-    private int m_Resolution;
-    [SerializeField]
-    private Vector2 m_NoiseCenter;
-    [SerializeField]
-    private float m_NoiseScale;
-    [SerializeField]
-    private float m_NoiseStrength;
-    [SerializeField]
-    private AnimationCurve m_AnimNoiseStrength;
+    private int m_Resolution = 2;
+    //[SerializeField]
+    //private Vector2 m_NoiseCenter;
+    //[SerializeField]
+    //private float m_NoiseScale;
+    //[SerializeField]
+    //private float m_NoiseStrength;
+    //[SerializeField]
+    //private AnimationCurve m_AnimNoiseStrength;
     [SerializeField]
     private Material m_Material;
+
+    private MeshRenderer m_Renderer;
+    private MeshFilter m_Filter;
+
+    private void OnValidate()
+    {
+        CreatePlane();
+    }
 
     public void CreatePlane()
     {
         #region Adding Components
-        MeshRenderer meshRen = this.gameObject.AddComponent<MeshRenderer>();
-        Mesh mesh = this.gameObject.AddComponent<MeshFilter>().mesh;
+        if(m_Renderer == null)
+            m_Renderer = this.gameObject.AddComponent<MeshRenderer>();
+        if(m_Filter == null)
+            m_Filter = this.gameObject.AddComponent<MeshFilter>();
+
+        Mesh mesh = m_Filter.mesh;
         mesh.name = "Procedural Plane";
-        meshRen.material = m_Material;
+        m_Renderer.material = m_Material;
         #endregion
 
         Vector3 meshStartPos = (new Vector3(m_Scale, 0, m_Scale) / 2) * -1;
@@ -42,10 +54,10 @@ public class PlaneMeshGenerator : MonoBehaviour
 
                 Vector3 planePos = meshStartPos + Vector3.right * percent.x * m_Scale + Vector3.forward * percent.y * m_Scale;
 
-                Vector2 noiseValuePos = m_NoiseCenter + new Vector2(planePos.x, planePos.z) * m_NoiseScale;
+                //Vector2 noiseValuePos = m_NoiseCenter + new Vector2(planePos.x, planePos.z) * m_NoiseScale;
 
-                //Vector3 noisePos = planePos + Vector3.up * Mathf.PerlinNoise(noiseValuePos.x, noiseValuePos.y) * m_AnimNoiseStrength.Evaluate(percent.x);
-                Vector3 noisePos = planePos + Vector3.up * Mathf.PerlinNoise(noiseValuePos.x, noiseValuePos.y) * m_NoiseStrength;
+                ////Vector3 noisePos = planePos + Vector3.up * Mathf.PerlinNoise(noiseValuePos.x, noiseValuePos.y) * m_AnimNoiseStrength.Evaluate(percent.x);
+                //Vector3 noisePos = planePos + Vector3.up * Mathf.PerlinNoise(noiseValuePos.x, noiseValuePos.y) * m_NoiseStrength;
 
                 vertices[i] = planePos;
 

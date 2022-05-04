@@ -4,29 +4,67 @@ using UnityEngine;
 
 public static class MeshCreator
 {
-    public static Mesh CreateCube(int _resolution, float _size, Vector3 _worldPosition)
+    public static Mesh CreateCube(int _resolution, float _size)
     {
-        Vector3[] vertices = new Vector3[_resolution * _resolution * _resolution];
+        Mesh mesh = new Mesh();
+        CombineInstance[] combine = new CombineInstance[6];
 
-        int count = 0;
-        for (int z = 0; z < _resolution; z++)
+        Vector3[] directions =
         {
-            for (int y = 0; y < _resolution; y++)
+            Vector3.up,
+            Vector3.down,
+            Vector3.left,
+            Vector3.right,
+            Vector3.forward,
+            Vector3.back
+        };
+
+        for (int i = 0; i < combine.Length; i++)
+        {
+            combine[i].mesh = CreatePlane(_resolution, _size, directions[i]);
+        }
+
+        mesh.CombineMeshes(combine);
+        mesh.RecalculateNormals();
+
+        return mesh;
+    }
+
+    public static Mesh CreatePlane(int _resolution, float _size, Vector3 _localUp)
+    {
+        Vector3 axisA = new Vector3(_localUp.y, _localUp.z, _localUp.x);
+        Vector3 axisB = Vector3.Cross(_localUp, axisA);
+
+        Vector3[] vertices = new Vector3[_resolution * _resolution];
+        int[] triangles = new int[(_resolution - 1) * (_resolution - 1) * 2 * 3];
+
+        int triIdx = 0;
+        for (int y = 0, i = 0; y < _resolution; y++)
+        {
+            for (int x = 0; x < _resolution; x++, i++)
             {
-                for (int x = 0; x < _resolution; x++)
+                Vector2 percent = new Vector2(x, y) / (_resolution - 1);
+
+                Vector3 pos = _localUp + axisA * (percent.x - .5f) * _size + axisB * (percent.y - .5f) * _size;
+
+                vertices[i] = pos;
+
+                if (x != _resolution - 1 && y != _resolution - 1)
                 {
-                    Vector3 idx = new Vector3(x, y, z);
-                    Vector3 percentualOffset = idx / (_resolution - 1); // prozentualer Offset pro Dimension
-                    Vector3 localPos = ((Vector3.one * _size) * -1) / 2f + percentualOffset * _size;
+                    triangles[triIdx + 0] = triangles[triIdx + 3] = i;
+                    triangles[triIdx + 1] = triangles[triIdx + 5] = i + _resolution + 1;
+                    triangles[triIdx + 2] = i + 1;
+                    triangles[triIdx + 4] = i + _resolution;
 
-                    vertices[count] = localPos;
-
-                    count++;
+                    triIdx += 6;
                 }
             }
         }
 
         Mesh mesh = new Mesh();
+        mesh.vertices = vertices;
+        mesh.triangles = triangles;
+        mesh.RecalculateNormals();
 
         return mesh;
     }
