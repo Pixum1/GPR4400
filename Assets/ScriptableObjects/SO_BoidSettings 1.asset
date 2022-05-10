@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d7619de4e2135b42b2db1a44e4c59d9, type: 3}
+  m_Name: SO_BoidSettings 1
+  m_EditorClassIdentifier: 
+  m_MoveSpeed: 141
+  m_Size: 0.42
+  m_AlignmentIntensity: 2.36
+  m_CohesionIntensity: 1.38
+  m_SeperationIntensity: 2.17
+  m_targetHeightIntensity: 0.16
+  m_AvoidanceIntensity: 3.02
+  m_RayCount: 200
+  m_currentIntensity: 0.07
+  m_BoidRadius: 3
+  m_AvoidanceRadius: 10
+  m_targetHeight: 100
+  m_ObstacleLayer:
+    serializedVersion: 2
+    m_Bits: 6657
+  m_BoidLayer:
+    serializedVersion: 2
+    m_Bits: 1024

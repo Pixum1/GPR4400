@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Mat_WavingGrass 1
+  m_Shader: {fileID: -6465566751694194690, guid: 3b3994b430ce8d14984314cabadbc334, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_0ae8d8aefa6e46acb8474a85678a1238:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_140819ec4f1a474c87479c89947506ef:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_4b039d20b7cb463db26d402fb0ca9f72:
+        m_Texture: {fileID: 2800000, guid: f5d87f257f3fefd489b93fa6642c5950, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_8f5c6143aa014916bba556a99ea2710c:
+        m_Texture: {fileID: 2800000, guid: f80cf63fec16c254991778c891f2f248, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_d046ea687b98407c9a6d59921d088bd2:
+        m_Texture: {fileID: 2800000, guid: ce32ec9a476cd4c4cb6914552d892ada, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SNToonShading_6e249936ebfe4a9fa526a89a9c423601_Texture2D66d0fdb846fe4817a1336d7894f45d1c_1051219302:
+        m_Texture: {fileID: 2800000, guid: 3d02edae0e55d434ebfcc96ae25e97e9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SNToonShading_e3a18fd28d574ee29fa117a65b1ef7d2_Texture2D66d0fdb846fe4817a1336d7894f45d1c_1051219302:
+        m_Texture: {fileID: 2800000, guid: 3d02edae0e55d434ebfcc96ae25e97e9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_0ed26746b8c44e869585e1ff09e20fbd_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 97b8a9e2722a1584c979a681af171c45, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_42df114bf6d9459d8694dc7fec9cb190_Texture_1:
+        m_Texture: {fileID: 2800000, guid: ce32ec9a476cd4c4cb6914552d892ada, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_6c8e69a972cd41d5b59aa30ecd9eeafb_Texture_1:
+        m_Texture: {fileID: 2800000, guid: b784588a50475f54bbb7924709fbecd8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_720ae130f4df42f1893bd2de472803ed_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 97b8a9e2722a1584c979a681af171c45, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_7605fe76b6ca434f92441572e6db55f8_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 97b8a9e2722a1584c979a681af171c45, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_8efdf224322e4fc3a387ca2641a0b34b_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 97b8a9e2722a1584c979a681af171c45, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_65654ee7ea3342c1b89b919fef76264b: 0.1
+    - Vector1_900fbcbd71814d328b0299503ca97058: 1.41
+    - Vector1_9e9bcdf330884e14af7e8135429c0129: 0.5
+    - Vector1_a68b4f177c7d4fb394f2648bd8af6242: 0.207
+    - Vector1_b55484635c3340b2b8128c223d507bc5: 2
+    - Vector1_c321a07be9534894b139707637c4cde5: 0.01
+    m_Colors:
+    - Color_42987111e0314ffe88923b44fca289e6: {r: 0.5727973, g: 0.9150943, b: 0.12517802, a: 1}
+    - Color_bdc945ea367f4ddaaeebb0c30de4ad7d: {r: 0.11922922, g: 0.31132078, b: 0, a: 1}
+  m_BuildTextureStacks: []
