@@ -19,6 +19,6 @@ public class MapGenerator : MonoBehaviour
 
     public void GenerateMap()
     {
-        float[,] noiseMap = NoiseScript.GenerateNoiseMap(m_MapWidth, m_MapHeight, m_NoiseScale, m_Octaves, m_Persistance, m_Lacunarity);
+        //float[,] noiseMap = NoiseScript.GenerateNoiseMap(m_MapWidth, m_MapHeight, m_NoiseScale, m_Octaves, m_Persistance, m_Lacunarity);
     }
 }

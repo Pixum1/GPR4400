@@ -53,10 +53,15 @@ public class PlaneMeshGenerator : MonoBehaviour
         m_Renderer.material = m_Material;
         #endregion
 
-        float[,] noiseMap = NoiseScript.GenerateNoiseMap(m_Resolution, m_Resolution, m_NoiseScale, m_Octaves, m_Persistance, m_Lacunarity);
+        //Scale offset with resolution and world position
+        float offsetX = (transform.position.x / m_NoiseScale) * ((m_Resolution - 1) / 100f); 
+        float offsetZ = (transform.position.z / m_NoiseScale) * ((m_Resolution - 1) / 100f);
+
+        float[,] noiseMap = NoiseScript.GenerateNoiseMap(m_Resolution, m_Resolution, m_NoiseScale, m_Octaves, m_Persistance, m_Lacunarity, new Vector2(offsetX, offsetZ));
 
         Vector3 meshStartPos = (new Vector3(m_Scale, 0, m_Scale) / 2) * -1;
         Vector3[] vertices = new Vector3[m_Resolution * m_Resolution];
+        Vector2[] uvs = new Vector2[vertices.Length];
         int[] triangles = new int[(m_Resolution - 1) * (m_Resolution - 1) * 2 * 3];
 
         int triIdx = 0;
@@ -69,6 +74,7 @@ public class PlaneMeshGenerator : MonoBehaviour
                 Vector3 positionOnPlane = meshStartPos + Vector3.right * percentualOffset.x * m_Scale + Vector3.forward * percentualOffset.y * m_Scale;
 
                 vertices[i] = positionOnPlane;
+                uvs[i] = positionOnPlane;
 
                 if (x != m_Resolution - 1 && y != m_Resolution - 1)
                 {
@@ -87,6 +93,7 @@ public class PlaneMeshGenerator : MonoBehaviour
         mesh.Clear();
         mesh.vertices = vertices;
         mesh.triangles = triangles;
+        mesh.uv = uvs;
         mesh.RecalculateNormals();
     }
 }

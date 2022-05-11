@@ -2,7 +2,7 @@ using UnityEngine;
 
 public static class NoiseScript
 {
-    public static float[,] GenerateNoiseMap(int _mapWidth, int _mapHeight, float _scale, int _octaves, float _persistance, float _lacunarity)
+    public static float[,] GenerateNoiseMap(int _mapWidth, int _mapHeight, float _scale, int _octaves, float _persistance, float _lacunarity, Vector2 _offset)
     {
         float[,] noiseMap = new float[_mapWidth, _mapHeight];
 
@@ -21,8 +21,8 @@ public static class NoiseScript
                 //octaves
                 for (int i = 0; i < _octaves; i++)
                 {
-                    float sampleX = x / _scale * frequency;
-                    float sampleY = y / _scale * frequency;
+                    float sampleX = (x / _scale + (_offset.y + 10000)) * frequency;
+                    float sampleY = (y / _scale + (_offset.x + 10000)) * frequency;
 
                     float perlinValue = Mathf.PerlinNoise(sampleX, sampleY) * 2 - 1;
 
@@ -32,22 +32,22 @@ public static class NoiseScript
                     frequency *= _lacunarity;
                 }
 
-                if(noiseHeight > maxNoiseHeight)
+                if (noiseHeight > maxNoiseHeight)
                     maxNoiseHeight = noiseHeight;
-                if(noiseHeight < minNoiseHeight)
+                if (noiseHeight < minNoiseHeight)
                     minNoiseHeight = noiseHeight;
 
                 noiseMap[y, x] = noiseHeight;
             }
         }
-        for (int y = 0; y < _mapHeight; y++)
-        {
-            for (int x = 0; x < _mapWidth; x++)
-            {
-                //normalize noiseMap
-                noiseMap[x,y] = Mathf.InverseLerp(minNoiseHeight, maxNoiseHeight, noiseMap[x,y]);
-            }
-        }
+        //for (int y = 0; y < _mapHeight; y++)
+        //{
+        //    for (int x = 0; x < _mapWidth; x++)
+        //    {
+        //        //normalize noiseMap
+        //        //noiseMap[x,y] = Mathf.InverseLerp(minNoiseHeight, maxNoiseHeight, noiseMap[x,y]);
+        //    }
+        //}
 
 
         return noiseMap;
