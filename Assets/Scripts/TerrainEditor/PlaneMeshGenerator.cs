@@ -61,39 +61,36 @@ public class PlaneMeshGenerator : MonoBehaviour
 
         Vector3 meshStartPos = (new Vector3(m_Scale, 0, m_Scale) / 2) * -1;
         Vector3[] vertices = new Vector3[m_Resolution * m_Resolution];
-        Vector2[] uvs = new Vector2[vertices.Length];
         int[] triangles = new int[(m_Resolution - 1) * (m_Resolution - 1) * 2 * 3];
 
         int triIdx = 0;
-        for (int y = 0, i = 0; y < m_Resolution; y++)
+        for (int y = 0, vertIdx = 0; y < m_Resolution; y++)
         {
-            for (int x = 0; x < m_Resolution; x++, i++)
+            for (int x = 0; x < m_Resolution; x++, vertIdx++)
             {
                 Vector2 percentualOffset = new Vector2(x, y) / (m_Resolution - 1);
 
-                Vector3 positionOnPlane = meshStartPos + Vector3.right * percentualOffset.x * m_Scale + Vector3.forward * percentualOffset.y * m_Scale;
+                Vector3 vertPosition = meshStartPos + new Vector3(percentualOffset.x, 0, percentualOffset.y) * m_Scale;
 
-                vertices[i] = positionOnPlane;
-                uvs[i] = positionOnPlane;
+                vertices[vertIdx] = vertPosition;
 
-                if (x != m_Resolution - 1 && y != m_Resolution - 1)
+                if (x < m_Resolution - 1 && y < m_Resolution - 1)
                 {
-                    triangles[triIdx + 0] = triangles[triIdx + 3] = i;
-                    triangles[triIdx + 1] = triangles[triIdx + 5] = i + m_Resolution + 1;
-                    triangles[triIdx + 2] = i + 1;
-                    triangles[triIdx + 4] = i + m_Resolution;
+                    triangles[triIdx + 0] = triangles[triIdx + 3] = vertIdx;
+                    triangles[triIdx + 1] = triangles[triIdx + 5] = vertIdx + m_Resolution + 1;
+                    triangles[triIdx + 2] = vertIdx + 1;
+                    triangles[triIdx + 4] = vertIdx + m_Resolution;
 
                     triIdx += 6;
                 }
 
-                vertices[i] = new Vector3(vertices[i].x, noiseMap[x, y] * m_NoiseHeight, vertices[i].z);
+                vertices[vertIdx] = new Vector3(vertices[vertIdx].x, noiseMap[x, y] * m_NoiseHeight, vertices[vertIdx].z);
             }
         }
 
         mesh.Clear();
         mesh.vertices = vertices;
         mesh.triangles = triangles;
-        mesh.uv = uvs;
         mesh.RecalculateNormals();
     }
 }
