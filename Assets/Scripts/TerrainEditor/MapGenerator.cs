@@ -27,11 +27,20 @@ public static class MapGenerator
         float persistence = _data.Persistence;
         float lacunarity = _data.Lacunarity;
 
+        int seed = 0;
+        if (_data.Seed.Length == 0)
+            seed = _data.RandomSeed;
+        else
+        {
+            seed = _data.Seed.GetHashCode();
+            seed = Mathf.RoundToInt(seed/100000);
+        }
+
         //Scale offset with resolution and world position
         float offsetX = (_rootPos.x / noiseScale) * ((chunkRes - 1) / 100f);
         float offsetZ = (_rootPos.z / noiseScale) * ((chunkRes - 1) / 100f);
 
-        float[,] noiseMap = NoiseScript.GenerateNoiseMap(chunkRes, chunkRes, noiseScale, octaves, persistence, lacunarity, new Vector2(offsetX, offsetZ));
+        float[,] noiseMap = NoiseScript.GenerateNoiseMap(chunkRes, noiseScale, octaves, persistence, lacunarity, new Vector2(offsetX, offsetZ), seed);
 
         Vector3 meshStartPos = (new Vector3(_chunkScale, 0, _chunkScale) / 2) * -1;
         Vector3[] vertices = new Vector3[chunkRes * chunkRes];

@@ -370,6 +370,8 @@ MonoBehaviour:
   m_TerrainData:
     m_TerrainSettings: {fileID: 11400000, guid: 4e6bf1ce4e5f9744f9c6ae60eeb725b3, type: 2}
     m_WaterSettings: {fileID: 11400000, guid: bdff1bc6a446db348be45aa8ecf2b81c, type: 2}
+    Seed: cool
+    RandomSeed: 0
     m_TerrainResolution: 100
     m_NoiseScale: 50
     m_Octaves: 4

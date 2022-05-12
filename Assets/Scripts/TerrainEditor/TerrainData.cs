@@ -8,7 +8,11 @@ public class TerrainData
     private TerrainSettings m_TerrainSettings;
     [SerializeField]
     private WaterSettings m_WaterSettings;
-    
+
+    [Header("Seed")]
+    public string Seed;
+    [HideInInspector]
+    public int RandomSeed;
 
     [Header("Terrain Settings")]
     [SerializeField, Range(2, 256)]

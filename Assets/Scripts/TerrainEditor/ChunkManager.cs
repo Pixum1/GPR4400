@@ -23,6 +23,7 @@ public class ChunkManager : MonoBehaviour
     {
         allChunks = new Dictionary<Vector2Int, Chunk>();
         loadedChunks = new List<Vector2Int>();
+        m_TerrainData.RandomSeed = Random.Range(10000, 50000);
     }
 
     private void Update()
@@ -32,7 +33,8 @@ public class ChunkManager : MonoBehaviour
 
     public void RegenerateChunks()
     {
-        foreach(Transform child in transform)
+        m_TerrainData.RandomSeed = Random.Range(10000, 50000);
+        foreach (Transform child in transform)
         {
             GameObject.Destroy(child.gameObject);
         }

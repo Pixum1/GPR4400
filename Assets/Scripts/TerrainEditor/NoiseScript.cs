@@ -2,16 +2,16 @@ using UnityEngine;
 
 public static class NoiseScript
 {
-    public static float[,] GenerateNoiseMap(int _mapWidth, int _mapHeight, float _scale, int _octaves, float _persistance, float _lacunarity, Vector2 _offset)
+    public static float[,] GenerateNoiseMap(int _mapSize, float _scale, int _octaves, float _persistance, float _lacunarity, Vector2 _offset, int _seed)
     {
-        float[,] noiseMap = new float[_mapWidth, _mapHeight];
+        float[,] noiseMap = new float[_mapSize, _mapSize];
 
         float maxNoiseHeight = float.MinValue;
         float minNoiseHeight = float.MaxValue;
 
-        for (int y = 0; y < _mapHeight; y++)
+        for (int y = 0; y < _mapSize; y++)
         {
-            for (int x = 0; x < _mapWidth; x++)
+            for (int x = 0; x < _mapSize; x++)
             {
                 float amplitude = 1;
                 float frequency = 1;
@@ -21,8 +21,8 @@ public static class NoiseScript
                 //octaves
                 for (int i = 0; i < _octaves; i++)
                 {
-                    float sampleX = (x / _scale + (_offset.y + 10000)) * frequency;
-                    float sampleY = (y / _scale + (_offset.x + 10000)) * frequency;
+                    float sampleX = (x / _scale + (_offset.y  + _seed)) * frequency;
+                    float sampleY = (y / _scale + (_offset.x  + _seed)) * frequency;
 
                     float perlinValue = Mathf.PerlinNoise(sampleX, sampleY) * 2 - 1;
 
@@ -40,14 +40,6 @@ public static class NoiseScript
                 noiseMap[y, x] = noiseHeight;
             }
         }
-        //for (int y = 0; y < _mapHeight; y++)
-        //{
-        //    for (int x = 0; x < _mapWidth; x++)
-        //    {
-        //        //normalize noiseMap
-        //        //noiseMap[x,y] = Mathf.InverseLerp(minNoiseHeight, maxNoiseHeight, noiseMap[x,y]);
-        //    }
-        //}
 
 
         return noiseMap;
