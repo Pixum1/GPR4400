@@ -5,28 +5,22 @@ using UnityEngine;
 public class BoidManager : MonoBehaviour
 {
     [SerializeField]
-    private VectorField vField;
+    private ChunkManager chunkManager;
+
+    public int maximunAmountOfBoids;
+    [HideInInspector]
     public List<Boid> Boids = new List<Boid>();
 
-    private Octtree octtree;
     private List<Boid> returnedObjects = new List<Boid>();
 
-    [SerializeField]
-    private float boxSize;
-
-    private void Start()
-    {
-        vField = FindObjectOfType<VectorField>();
-        octtree = new Octtree(0, new Box(boxSize, boxSize, boxSize, transform.position));
-    }
 
     private void Update()
     {
-        octtree.Clear();
+        chunkManager.octree.Clear();
 
         for (int b = 0; b < Boids.Count; b++)
         {
-            octtree.Insert(Boids[b]);
+            chunkManager.octree.Insert(Boids[b]);
         }
 
         for (int i = 0; i < Boids.Count; i++)
@@ -38,7 +32,7 @@ public class BoidManager : MonoBehaviour
             b.Neighbours.Clear();
 
             returnedObjects.Clear();
-            octtree.Retrieve(returnedObjects, b);
+            chunkManager.octree.Retrieve(returnedObjects, b);
 
             for (int f = 0; f < returnedObjects.Count; f++)
             {
@@ -67,20 +61,15 @@ public class BoidManager : MonoBehaviour
                 b.rb.velocity += ApplyObstacleAvoidance(b.m_Settings.AvoidanceIntensity * (b.m_Settings.Speed * Time.deltaTime), b); //<- apply obstacle avoidance
             }
 
-            if (vField != null)
-            {
-                Vector3 vectorForce = vField.GetForceDirection(transform.position);
-                b.rb.velocity += vectorForce.normalized * b.m_Settings.CurrentIntensity;
-            }
-
-            float targetHeight = boxSize/2 - b.m_Settings.TargetHeight;
-            if (b.transform.localPosition.y != targetHeight)
-            {
-                if (b.transform.localPosition.y > targetHeight)
-                    b.rb.velocity -= Vector3.up * b.m_Settings.TargetHeightIntensity;
-                else
-                    b.rb.velocity += Vector3.up * b.m_Settings.TargetHeightIntensity;
-            }
+            //--Target Height
+            //float targetHeight = chunkManager.octree.box.Size.y / 2 - b.m_Settings.TargetHeight;
+            //if (b.transform.localPosition.y != targetHeight)
+            //{
+            //    if (b.transform.localPosition.y > targetHeight)
+            //        b.rb.velocity -= Vector3.up * b.m_Settings.TargetHeightIntensity;
+            //    else
+            //        b.rb.velocity += Vector3.up * b.m_Settings.TargetHeightIntensity;
+            //}
 
             b.rb.velocity += ApplyAlignment(b.m_Settings.Alignment, b); //<- apply alignment
             b.rb.velocity += ApplyCohesion(b.m_Settings.Cohesion, b); //<- apply cohesion
@@ -187,9 +176,8 @@ public class BoidManager : MonoBehaviour
                 Gizmos.DrawLine(Boids[i].transform.position, Boids[i].Neighbours[n].transform.position);
             }
         }
-        if (octtree != null)
-            octtree.Show();
-
-        Gizmos.DrawWireCube(transform.position, Vector3.one * boxSize);
+        if (chunkManager != null)
+            if (chunkManager.octree != null)
+                chunkManager.octree.Show();
     }
 }

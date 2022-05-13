@@ -8,6 +8,8 @@ public class TerrainSettings : ScriptableObject
     [SerializeField, Range(2, 256)]
     public int Resolution = 128;
     [SerializeField]
+    public string Seed;
+    [SerializeField]
     public float NoiseScale = 10;
     [SerializeField, Range(1, 4)]
     public int Octaves = 1;

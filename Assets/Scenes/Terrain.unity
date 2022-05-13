@@ -345,6 +345,7 @@ GameObject:
   m_Component:
   - component: {fileID: 594400068}
   - component: {fileID: 594400067}
+  - component: {fileID: 594400069}
   m_Layer: 0
   m_Name: ChunkManager
   m_TagString: Untagged
@@ -365,13 +366,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Player: {fileID: 129504677}
+  m_BoidPrefab: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
   m_ChunkScale: 100
   m_RenderDistance: 1
   m_TerrainData:
     m_TerrainSettings: {fileID: 11400000, guid: 4e6bf1ce4e5f9744f9c6ae60eeb725b3, type: 2}
     m_WaterSettings: {fileID: 11400000, guid: bdff1bc6a446db348be45aa8ecf2b81c, type: 2}
-    Seed: cool
-    RandomSeed: 0
+    RandomizeSeed: 1
+    Seed: 
+    GroundLayer: 13
     m_TerrainResolution: 100
     m_NoiseScale: 50
     m_Octaves: 4
@@ -381,6 +384,7 @@ MonoBehaviour:
     m_TerrainMaterial: {fileID: 2100000, guid: 60604762caa323d4ab084de7208b5ef9, type: 2}
     m_WaterResolution: 10
     m_WaterMaterial: {fileID: 2100000, guid: 5e9c55a38523c9a4cb301b5b903d63b2, type: 2}
+  loadedChunks: []
 --- !u!4 &594400068
 Transform:
   m_ObjectHideFlags: 0
@@ -395,6 +399,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &594400069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594400066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec9c65e67203fd64891a7fae0098e81d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chunkManager: {fileID: 594400067}
+  maximunAmountOfBoids: 0
+  Boids: []
 --- !u!1 &777258970
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,11 +10,11 @@ public class TerrainData
     private WaterSettings m_WaterSettings;
 
     [Header("Seed")]
+    public bool RandomizeSeed;
     public string Seed;
-    [HideInInspector]
-    public int RandomSeed;
 
     [Header("Terrain Settings")]
+    public int GroundLayer = 13;
     [SerializeField, Range(2, 256)]
     private int m_TerrainResolution = 128;
     [SerializeField]
@@ -50,6 +50,7 @@ public class TerrainData
     public void ApplyTerrainSettings()
     {
         m_TerrainResolution = m_TerrainSettings.Resolution;
+        Seed = m_TerrainSettings.Seed;
         m_NoiseScale = m_TerrainSettings.NoiseScale;
         m_Octaves = m_TerrainSettings.Octaves;
         m_Persistence = m_TerrainSettings.Persistence;
@@ -65,6 +66,7 @@ public class TerrainData
     public void SaveTerrainSettings()
     {
         m_TerrainSettings.Resolution = m_TerrainResolution;
+        m_TerrainSettings.Seed = Seed;
         m_TerrainSettings.NoiseScale = m_NoiseScale;
         m_TerrainSettings.Octaves = m_Octaves;
         m_TerrainSettings.Persistence = m_Persistence;

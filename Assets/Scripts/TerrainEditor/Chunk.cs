@@ -18,7 +18,7 @@ public class Chunk : MonoBehaviour
 
     private bool isGenerated;
 
-    public void InitGround(Vector3 _meshPos, Mesh _meshData, Material _material)
+    public void InitGround(Vector3 _meshPos, Mesh _meshData, int _layer, Material _material)
     {
         transform.localPosition = _meshPos;
         groundMesh = _meshData;
@@ -26,12 +26,16 @@ public class Chunk : MonoBehaviour
 
         GameObject groundObj = new GameObject("Ground");
         groundObj.transform.SetParent(transform);
+        groundObj.layer = _layer;
 
         groundRenderer = groundObj.AddComponent<MeshRenderer>();
         groundFilter = groundObj.AddComponent<MeshFilter>();
+        MeshCollider collider = groundObj.AddComponent<MeshCollider>();
 
         groundFilter.sharedMesh = groundMesh;
         groundRenderer.sharedMaterial = groundMaterial;
+        collider.sharedMesh = null;
+        collider.sharedMesh = groundMesh;
     }
 
     public void InitWater(Vector3 _meshPos, Mesh _meshData, Material _material)
@@ -45,11 +49,33 @@ public class Chunk : MonoBehaviour
 
         waterRenderer = waterObj.AddComponent<MeshRenderer>();
         waterFilter = waterObj.AddComponent<MeshFilter>();
+        MeshCollider collider = waterObj.AddComponent<MeshCollider>();
 
         waterFilter.sharedMesh = waterMesh;
         waterRenderer.sharedMaterial = waterMaterial;
+        collider.sharedMesh = null;
+        collider.sharedMesh = waterMesh;
 
         isGenerated = false;
+    }
+
+    public void InitBoids(Vector3 _chunkPos, float _chunkSize, int _boidAmount, GameObject _boidPrefab, LayerMask _groundLayer)
+    {
+        GameObject boidContainer = new GameObject("BoidContainer");
+        boidContainer.transform.SetParent(transform);
+
+        for (int i = 0; i < _boidAmount; i++)
+        {
+            Vector3 randomPos = new Vector3(Random.insideUnitCircle.x * (_chunkSize/2) + _chunkPos.x, -3, Random.insideUnitCircle.y * (_chunkSize/2) +_chunkPos.z);
+
+            GameObject boid = Instantiate(_boidPrefab, boidContainer.transform);
+            boid.transform.position = randomPos;
+
+            //if (Physics.Raycast(randomPos, Vector3.down, float.MaxValue, _groundLayer))
+            //{
+                
+            //}
+        }
     }
 
     public void Load()

@@ -2,7 +2,7 @@
 
 public static class MapGenerator
 {
-    public static Chunk GenerateChunk(Vector3 _rootPos, float _scale, TerrainData _data, Transform _parent)
+    public static Chunk GenerateChunk(Vector3 _rootPos, float _scale, TerrainData _data, GameObject _boidPrefab, Transform _parent)
     {
         GameObject newChunkObj = new GameObject($"Chunk {_rootPos.x} - {_rootPos.y} - {_rootPos.z}");
         newChunkObj.transform.SetParent(_parent);
@@ -12,8 +12,9 @@ public static class MapGenerator
         Mesh terrain = GenerateTerrain(_rootPos, _scale, _data);
         Mesh water = GenerateWater(_rootPos, _scale, _data);
 
-        newChunk.InitGround(_rootPos, terrain, _data.TerrainMaterial);
+        newChunk.InitGround(_rootPos, terrain, _data.GroundLayer, _data.TerrainMaterial);
         newChunk.InitWater(_rootPos, water, _data.WaterMaterial);
+        newChunk.InitBoids(_rootPos, _scale, 100, _boidPrefab, _data.GroundLayer);
 
         return newChunk;
     }
@@ -27,14 +28,8 @@ public static class MapGenerator
         float persistence = _data.Persistence;
         float lacunarity = _data.Lacunarity;
 
-        int seed = 0;
-        if (_data.Seed.Length == 0)
-            seed = _data.RandomSeed;
-        else
-        {
-            seed = _data.Seed.GetHashCode();
-            seed = Mathf.RoundToInt(seed/100000);
-        }
+        int seed = _data.Seed.GetHashCode();
+        seed = Mathf.RoundToInt(seed / 100000);
 
         //Scale offset with resolution and world position
         float offsetX = (_rootPos.x / noiseScale) * ((chunkRes - 1) / 100f);
@@ -73,8 +68,12 @@ public static class MapGenerator
         }
 
         Mesh mesh = new Mesh();
+        mesh.name = $"Ground: {_rootPos.x} | {_rootPos.y} | {_rootPos.z}";
         mesh.vertices = vertices;
         mesh.triangles = triangles;
+
+        mesh.RecalculateBounds();
+        mesh.RecalculateNormals();
 
         return mesh;
     }
@@ -113,8 +112,12 @@ public static class MapGenerator
         }
 
         Mesh mesh = new Mesh();
+        mesh.name = $"Water: {_rootPos.x} | {_rootPos.y} | {_rootPos.z}";
         mesh.vertices = vertices;
         mesh.triangles = triangles;
+
+        mesh.RecalculateBounds();
+        mesh.RecalculateNormals();
 
         return mesh;
     }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Octtree
+public class Octree
 {
     private int maxObjects = 10;
     private int maxSubdivision = 10;
@@ -10,14 +10,14 @@ public class Octtree
     private int level;
     public Box box;
     private List<Boid> objects;
-    public Octtree[] nodes;
+    public Octree[] nodes;
 
-    public Octtree(int _level, Box _newBox)
+    public Octree(int _level, Box _newBox)
     {
         this.level = _level;
         this.box = _newBox;
         this.objects = new List<Boid>();
-        this.nodes = new Octtree[8];
+        this.nodes = new Octree[8];
     }
 
     public void Clear()
@@ -38,14 +38,14 @@ public class Octtree
     {
         Vector3 subBoxSize = box.Size / 2f;
 
-        nodes[0] = new Octtree(level + 1, new Box(subBoxSize.x, subBoxSize.y, subBoxSize.z, new Vector3(box.Center.x - box.Size.x / 4, box.Center.y - box.Size.y / 4, box.Center.z - box.Size.z / 4)));
-        nodes[1] = new Octtree(level + 1, new Box(subBoxSize.x, subBoxSize.y, subBoxSize.z, new Vector3(box.Center.x + box.Size.x / 4, box.Center.y - box.Size.y / 4, box.Center.z - box.Size.z / 4)));
-        nodes[2] = new Octtree(level + 1, new Box(subBoxSize.x, subBoxSize.y, subBoxSize.z, new Vector3(box.Center.x + box.Size.x / 4, box.Center.y - box.Size.y / 4, box.Center.z + box.Size.z / 4)));
-        nodes[3] = new Octtree(level + 1, new Box(subBoxSize.x, subBoxSize.y, subBoxSize.z, new Vector3(box.Center.x - box.Size.x / 4, box.Center.y - box.Size.y / 4, box.Center.z + box.Size.z / 4)));
-        nodes[4] = new Octtree(level + 1, new Box(subBoxSize.x, subBoxSize.y, subBoxSize.z, new Vector3(box.Center.x - box.Size.x / 4, box.Center.y + box.Size.y / 4, box.Center.z - box.Size.z / 4)));
-        nodes[5] = new Octtree(level + 1, new Box(subBoxSize.x, subBoxSize.y, subBoxSize.z, new Vector3(box.Center.x + box.Size.x / 4, box.Center.y + box.Size.y / 4, box.Center.z - box.Size.z / 4)));
-        nodes[6] = new Octtree(level + 1, new Box(subBoxSize.x, subBoxSize.y, subBoxSize.z, new Vector3(box.Center.x + box.Size.x / 4, box.Center.y + box.Size.y / 4, box.Center.z + box.Size.z / 4)));
-        nodes[7] = new Octtree(level + 1, new Box(subBoxSize.x, subBoxSize.y, subBoxSize.z, new Vector3(box.Center.x - box.Size.x / 4, box.Center.y + box.Size.y / 4, box.Center.z + box.Size.z / 4)));
+        nodes[0] = new Octree(level + 1, new Box(subBoxSize.x, subBoxSize.y, subBoxSize.z, new Vector3(box.Center.x - box.Size.x / 4, box.Center.y - box.Size.y / 4, box.Center.z - box.Size.z / 4)));
+        nodes[1] = new Octree(level + 1, new Box(subBoxSize.x, subBoxSize.y, subBoxSize.z, new Vector3(box.Center.x + box.Size.x / 4, box.Center.y - box.Size.y / 4, box.Center.z - box.Size.z / 4)));
+        nodes[2] = new Octree(level + 1, new Box(subBoxSize.x, subBoxSize.y, subBoxSize.z, new Vector3(box.Center.x + box.Size.x / 4, box.Center.y - box.Size.y / 4, box.Center.z + box.Size.z / 4)));
+        nodes[3] = new Octree(level + 1, new Box(subBoxSize.x, subBoxSize.y, subBoxSize.z, new Vector3(box.Center.x - box.Size.x / 4, box.Center.y - box.Size.y / 4, box.Center.z + box.Size.z / 4)));
+        nodes[4] = new Octree(level + 1, new Box(subBoxSize.x, subBoxSize.y, subBoxSize.z, new Vector3(box.Center.x - box.Size.x / 4, box.Center.y + box.Size.y / 4, box.Center.z - box.Size.z / 4)));
+        nodes[5] = new Octree(level + 1, new Box(subBoxSize.x, subBoxSize.y, subBoxSize.z, new Vector3(box.Center.x + box.Size.x / 4, box.Center.y + box.Size.y / 4, box.Center.z - box.Size.z / 4)));
+        nodes[6] = new Octree(level + 1, new Box(subBoxSize.x, subBoxSize.y, subBoxSize.z, new Vector3(box.Center.x + box.Size.x / 4, box.Center.y + box.Size.y / 4, box.Center.z + box.Size.z / 4)));
+        nodes[7] = new Octree(level + 1, new Box(subBoxSize.x, subBoxSize.y, subBoxSize.z, new Vector3(box.Center.x - box.Size.x / 4, box.Center.y + box.Size.y / 4, box.Center.z + box.Size.z / 4)));
 
     }
 
@@ -116,5 +116,11 @@ public class Octtree
         if (nodes[0] != null)
             for (int i = 0; i < nodes.Length; i++)
                 nodes[i].Show();
+    }
+    public void ShowOutlines()
+    {
+        Color c = Color.red;
+
+        box.Show(c);
     }
 }
