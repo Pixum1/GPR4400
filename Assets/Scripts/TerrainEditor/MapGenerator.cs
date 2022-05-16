@@ -2,7 +2,7 @@
 
 public static class MapGenerator
 {
-    public static Chunk GenerateChunk(Vector3 _rootPos, float _scale, TerrainData _data, GameObject _boidPrefab, Transform _parent)
+    public static Chunk GenerateChunk(Vector3 _rootPos, float _scale, int _boidAmount, TerrainData _data, GameObject[] _boidPrefabs, Transform _parent)
     {
         GameObject newChunkObj = new GameObject($"Chunk {_rootPos.x} - {_rootPos.y} - {_rootPos.z}");
         newChunkObj.transform.SetParent(_parent);
@@ -12,9 +12,9 @@ public static class MapGenerator
         Mesh terrain = GenerateTerrain(_rootPos, _scale, _data);
         Mesh water = GenerateWater(_rootPos, _scale, _data);
 
-        newChunk.InitGround(_rootPos, terrain, _data.GroundLayer, _data.TerrainMaterial);
+        newChunk.InitGround(_rootPos, terrain, _data.TerrainMaterial);
         newChunk.InitWater(_rootPos, water, _data.WaterMaterial);
-        newChunk.InitBoids(_rootPos, _scale, 100, _boidPrefab, _data.GroundLayer);
+        newChunk.InitBoids(_rootPos, _scale, _boidAmount, _boidPrefabs);
 
         return newChunk;
     }
@@ -72,9 +72,6 @@ public static class MapGenerator
         mesh.vertices = vertices;
         mesh.triangles = triangles;
 
-        mesh.RecalculateBounds();
-        mesh.RecalculateNormals();
-
         return mesh;
     }
 
@@ -115,9 +112,6 @@ public static class MapGenerator
         mesh.name = $"Water: {_rootPos.x} | {_rootPos.y} | {_rootPos.z}";
         mesh.vertices = vertices;
         mesh.triangles = triangles;
-
-        mesh.RecalculateBounds();
-        mesh.RecalculateNormals();
 
         return mesh;
     }

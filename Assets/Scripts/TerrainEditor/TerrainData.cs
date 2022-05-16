@@ -14,7 +14,8 @@ public class TerrainData
     public string Seed;
 
     [Header("Terrain Settings")]
-    public int GroundLayer = 13;
+    //public int GroundLayer = 13;
+    //public int WaterLayer = 4;
     [SerializeField, Range(2, 256)]
     private int m_TerrainResolution = 128;
     [SerializeField]

@@ -12,21 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d7619de4e2135b42b2db1a44e4c59d9, type: 3}
   m_Name: SO_BoidSettings 2
   m_EditorClassIdentifier: 
-  m_MoveSpeed: 94
-  m_Size: 0.38
+  m_MoveSpeed: 150
+  m_Size: 0.5
   m_AlignmentIntensity: 3.64
   m_CohesionIntensity: 1.71
   m_SeperationIntensity: 2.16
-  m_targetHeightIntensity: 0.16
+  m_targetHeightIntensity: 0
   m_AvoidanceIntensity: 2
   m_RayCount: 200
-  m_currentIntensity: 0.1
-  m_BoidRadius: 3
+  m_currentIntensity: 0
+  m_BoidRadius: 6
   m_AvoidanceRadius: 10
   m_targetHeight: 100
   m_ObstacleLayer:
     serializedVersion: 2
-    m_Bits: 5633
+    m_Bits: 1
   m_BoidLayer:
     serializedVersion: 2
     m_Bits: 2048

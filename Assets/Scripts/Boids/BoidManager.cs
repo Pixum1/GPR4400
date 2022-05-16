@@ -7,7 +7,6 @@ public class BoidManager : MonoBehaviour
     [SerializeField]
     private ChunkManager chunkManager;
 
-    public int maximunAmountOfBoids;
     [HideInInspector]
     public List<Boid> Boids = new List<Boid>();
 
@@ -21,11 +20,19 @@ public class BoidManager : MonoBehaviour
         for (int b = 0; b < Boids.Count; b++)
         {
             chunkManager.octree.Insert(Boids[b]);
+
+            if (!chunkManager.octree.box.Contains(Boids[b].transform.position))
+            {
+                Boids[b].transform.gameObject.SetActive(false);
+            }
+            else
+            {
+                Boids[b].transform.gameObject.SetActive(true);
+            }
         }
 
         for (int i = 0; i < Boids.Count; i++)
         {
-
             Boid b = Boids[i];
 
             #region Octtree / Neighbour check

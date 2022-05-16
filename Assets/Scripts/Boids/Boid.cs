@@ -25,7 +25,7 @@ public class Boid : MonoBehaviour
 
     private void OnDisable()
     {
-        boidManager.Boids.Remove(this);
+        //boidManager.Boids.Remove(this);
     }
 
     private void Start()

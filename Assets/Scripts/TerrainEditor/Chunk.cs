@@ -6,19 +6,22 @@ public class Chunk : MonoBehaviour
     private MeshRenderer groundRenderer;
     private MeshFilter groundFilter;
     private Material groundMaterial;
+    private MeshCollider groundCol;
+    private float seafloor;
 
     private Mesh groundMesh;
 
     private MeshRenderer waterRenderer;
     private MeshFilter waterFilter;
     private Material waterMaterial;
+    private BoxCollider waterCol;
 
     private Mesh waterMesh;
     #endregion
 
     private bool isGenerated;
 
-    public void InitGround(Vector3 _meshPos, Mesh _meshData, int _layer, Material _material)
+    public void InitGround(Vector3 _meshPos, Mesh _meshData, /*int _layer,*/ Material _material)
     {
         transform.localPosition = _meshPos;
         groundMesh = _meshData;
@@ -26,19 +29,25 @@ public class Chunk : MonoBehaviour
 
         GameObject groundObj = new GameObject("Ground");
         groundObj.transform.SetParent(transform);
-        groundObj.layer = _layer;
+        //groundObj.layer = _layer;
+        //groundObj.isStatic = true;
 
         groundRenderer = groundObj.AddComponent<MeshRenderer>();
         groundFilter = groundObj.AddComponent<MeshFilter>();
-        MeshCollider collider = groundObj.AddComponent<MeshCollider>();
+        groundCol = groundObj.AddComponent<MeshCollider>();
 
         groundFilter.sharedMesh = groundMesh;
         groundRenderer.sharedMaterial = groundMaterial;
-        collider.sharedMesh = null;
-        collider.sharedMesh = groundMesh;
+        groundCol.sharedMesh = null;
+        groundCol.sharedMesh = groundMesh;
+
+        seafloor = _meshData.bounds.min.y;
+
+        groundMesh.RecalculateBounds();
+        groundMesh.RecalculateNormals();
     }
 
-    public void InitWater(Vector3 _meshPos, Mesh _meshData, Material _material)
+    public void InitWater(Vector3 _meshPos, Mesh _meshData, /*int _layer,*/ Material _material)
     {
         transform.localPosition = _meshPos;
         waterMesh = _meshData;
@@ -46,35 +55,46 @@ public class Chunk : MonoBehaviour
 
         GameObject waterObj = new GameObject("Water");
         waterObj.transform.SetParent(transform);
+        //waterObj.layer = _layer;
+        //waterObj.isStatic = true;
 
         waterRenderer = waterObj.AddComponent<MeshRenderer>();
         waterFilter = waterObj.AddComponent<MeshFilter>();
-        MeshCollider collider = waterObj.AddComponent<MeshCollider>();
+
 
         waterFilter.sharedMesh = waterMesh;
         waterRenderer.sharedMaterial = waterMaterial;
-        collider.sharedMesh = null;
-        collider.sharedMesh = waterMesh;
+
+        waterCol = waterObj.AddComponent<BoxCollider>();
+
+        waterMesh.RecalculateBounds();
+        waterMesh.RecalculateNormals();
 
         isGenerated = false;
     }
 
-    public void InitBoids(Vector3 _chunkPos, float _chunkSize, int _boidAmount, GameObject _boidPrefab, LayerMask _groundLayer)
+    public void InitBoids(Vector3 _chunkPos, float _chunkSize, int _boidAmount, GameObject[] _boidPrefabs/*, int _groundLayer*/)
     {
         GameObject boidContainer = new GameObject("BoidContainer");
         boidContainer.transform.SetParent(transform);
 
-        for (int i = 0; i < _boidAmount; i++)
+        int spawnedAmount = 0;
+        int iterations = 2000;
+
+        GameObject boidToSpawn = _boidPrefabs[Random.Range(0, _boidPrefabs.Length - 1)];
+
+        while(spawnedAmount < _boidAmount && iterations > 0)
         {
-            Vector3 randomPos = new Vector3(Random.insideUnitCircle.x * (_chunkSize/2) + _chunkPos.x, -3, Random.insideUnitCircle.y * (_chunkSize/2) +_chunkPos.z);
+            float circlePos = Random.insideUnitCircle.x * (_chunkSize / 2);
+            Vector3 randomPos = new Vector3(circlePos + _chunkPos.x, seafloor/2, circlePos + _chunkPos.z);
 
-            GameObject boid = Instantiate(_boidPrefab, boidContainer.transform);
-            boid.transform.position = randomPos;
-
-            //if (Physics.Raycast(randomPos, Vector3.down, float.MaxValue, _groundLayer))
-            //{
-                
-            //}
+            if (Physics.Raycast(randomPos, Vector3.down, float.MaxValue))
+            {
+                GameObject boid = Instantiate(boidToSpawn, boidContainer.transform);
+                boid.transform.position = randomPos;
+                spawnedAmount++;
+            }
+            iterations--;
         }
     }
 
@@ -91,11 +111,15 @@ public class Chunk : MonoBehaviour
         {
             groundRenderer.enabled = true;
             waterRenderer.enabled = true;
+            groundCol.enabled = true;
+            waterCol.enabled = true;
         }
     }
     public void Unload()
     {
         groundRenderer.enabled = false;
         waterRenderer.enabled = false;
+        groundCol.enabled = false;
+        waterCol.enabled = false;
     }
 }

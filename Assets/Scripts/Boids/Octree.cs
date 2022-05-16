@@ -49,6 +49,7 @@ public class Octree
 
     }
 
+
     public void Insert(Boid _boid)
     {
         //--if node is not a leaf node
@@ -93,10 +94,12 @@ public class Octree
 
         //-- Retrieve all objects of all subnodes containing this Boid
         if (index != -1 && nodes[0] != null)
+        {
             for (int i = 0; i < nodes.Length; i++)
             {
                 nodes[i].Retrieve(retrievedObjects, _boid);
             }
+        }
 
         retrievedObjects.AddRange(objects); //<- Add all objects of this node to a list
 

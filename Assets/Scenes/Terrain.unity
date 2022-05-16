@@ -295,8 +295,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 263090709}
-  m_LocalRotation: {x: -0.5808681, y: 0.0053531616, z: -0.003855522, w: -0.81397104}
-  m_LocalPosition: {x: -44.253963, y: 220.21083, z: -103.45406}
+  m_LocalRotation: {x: -0.35911363, y: 0.12457294, z: -0.048482943, w: -0.92367125}
+  m_LocalPosition: {x: 85.40127, y: 295.36703, z: -310.91312}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -366,15 +366,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Player: {fileID: 129504677}
-  m_BoidPrefab: {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+  m_BoidPrefabs:
+  - {fileID: 2814136426653296056, guid: 35bf54d31e71b9741981eec4660486fc, type: 3}
+  - {fileID: 2814136426653296056, guid: 4baf2ab3986e31e4fa9feb5ab1b1bef5, type: 3}
+  - {fileID: 2814136426653296056, guid: 50839cc8d12c962479abccb7448f958c, type: 3}
   m_ChunkScale: 100
   m_RenderDistance: 1
+  m_BoidsPerChunk: 100
   m_TerrainData:
     m_TerrainSettings: {fileID: 11400000, guid: 4e6bf1ce4e5f9744f9c6ae60eeb725b3, type: 2}
     m_WaterSettings: {fileID: 11400000, guid: bdff1bc6a446db348be45aa8ecf2b81c, type: 2}
-    RandomizeSeed: 1
-    Seed: 
-    GroundLayer: 13
+    RandomizeSeed: 0
+    Seed: 17387
     m_TerrainResolution: 100
     m_NoiseScale: 50
     m_Octaves: 4
@@ -384,7 +387,6 @@ MonoBehaviour:
     m_TerrainMaterial: {fileID: 2100000, guid: 60604762caa323d4ab084de7208b5ef9, type: 2}
     m_WaterResolution: 10
     m_WaterMaterial: {fileID: 2100000, guid: 5e9c55a38523c9a4cb301b5b903d63b2, type: 2}
-  loadedChunks: []
 --- !u!4 &594400068
 Transform:
   m_ObjectHideFlags: 0
@@ -412,7 +414,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chunkManager: {fileID: 594400067}
-  maximunAmountOfBoids: 0
   Boids: []
 --- !u!1 &777258970
 GameObject:
