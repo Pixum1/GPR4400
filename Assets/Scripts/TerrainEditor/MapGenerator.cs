@@ -81,6 +81,7 @@ public static class MapGenerator
 
         Vector3 meshStartPos = (new Vector3(_chunkScale, 0, _chunkScale) / 2) * -1;
         Vector3[] vertices = new Vector3[chunkRes * chunkRes];
+        Vector2[] uvs = new Vector2[vertices.Length];
         int[] triangles = new int[(chunkRes - 1) * (chunkRes - 1) * 2 * 3];
 
         int triIdx = 0;
@@ -93,6 +94,8 @@ public static class MapGenerator
                 Vector3 vertPosition = meshStartPos + new Vector3(percentualOffset.x, 0, percentualOffset.y) * _chunkScale;
 
                 vertices[vertIdx] = vertPosition;
+
+                uvs[vertIdx] = new Vector2(vertices[vertIdx].x, vertices[vertIdx].z);
 
                 if (x < chunkRes - 1 && y < chunkRes - 1)
                 {
@@ -112,6 +115,7 @@ public static class MapGenerator
         mesh.name = $"Water: {_rootPos.x} | {_rootPos.y} | {_rootPos.z}";
         mesh.vertices = vertices;
         mesh.triangles = triangles;
+        mesh.uv = uvs;
 
         return mesh;
     }

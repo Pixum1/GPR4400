@@ -20,12 +20,11 @@ public class Boid : MonoBehaviour
             rb = GetComponent<Rigidbody>();
 
         boidManager.Boids.Add(this);
-
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
-        //boidManager.Boids.Remove(this);
+        boidManager.Boids.Remove(this);
     }
 
     private void Start()

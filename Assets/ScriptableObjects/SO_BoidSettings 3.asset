@@ -19,7 +19,7 @@ MonoBehaviour:
   m_SeperationIntensity: 2.16
   m_targetHeightIntensity: 0
   m_AvoidanceIntensity: 2
-  m_RayCount: 200
+  m_RayCount: 100
   m_currentIntensity: 0
   m_BoidRadius: 6
   m_AvoidanceRadius: 10

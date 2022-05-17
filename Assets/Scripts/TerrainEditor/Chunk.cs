@@ -30,7 +30,7 @@ public class Chunk : MonoBehaviour
         GameObject groundObj = new GameObject("Ground");
         groundObj.transform.SetParent(transform);
         //groundObj.layer = _layer;
-        //groundObj.isStatic = true;
+        groundObj.isStatic = true;
 
         groundRenderer = groundObj.AddComponent<MeshRenderer>();
         groundFilter = groundObj.AddComponent<MeshFilter>();
@@ -56,11 +56,10 @@ public class Chunk : MonoBehaviour
         GameObject waterObj = new GameObject("Water");
         waterObj.transform.SetParent(transform);
         //waterObj.layer = _layer;
-        //waterObj.isStatic = true;
+        waterObj.isStatic = true;
 
         waterRenderer = waterObj.AddComponent<MeshRenderer>();
         waterFilter = waterObj.AddComponent<MeshFilter>();
-
 
         waterFilter.sharedMesh = waterMesh;
         waterRenderer.sharedMaterial = waterMaterial;

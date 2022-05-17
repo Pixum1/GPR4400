@@ -12,28 +12,26 @@ public class BoidManager : MonoBehaviour
 
     private List<Boid> returnedObjects = new List<Boid>();
 
-
     private void Update()
     {
         chunkManager.octree.Clear();
-
         for (int b = 0; b < Boids.Count; b++)
         {
             chunkManager.octree.Insert(Boids[b]);
 
             if (!chunkManager.octree.box.Contains(Boids[b].transform.position))
-            {
                 Boids[b].transform.gameObject.SetActive(false);
-            }
+
             else
-            {
                 Boids[b].transform.gameObject.SetActive(true);
-            }
         }
 
         for (int i = 0; i < Boids.Count; i++)
         {
             Boid b = Boids[i];
+
+            if (!b.gameObject.activeInHierarchy)
+                continue;
 
             #region Octtree / Neighbour check
             b.Neighbours.Clear();

@@ -27,8 +27,6 @@ public class ChunkManager : MonoBehaviour
     public Octree octree;
     private float octreeSize => m_ChunkScale * Mathf.Sqrt(loadedChunks.Count);
     private Vector3 octreePos => new Vector3(loadedChunks[(loadedChunks.Count - 1) / 2].x * m_ChunkScale, 0, loadedChunks[(loadedChunks.Count - 1) / 2].y * m_ChunkScale);
-    private Vector2Int currentMiddleChunk;
-    private Vector2Int lastMiddleChunk;
 
     private BoxCollider northCol;
     private BoxCollider eastCol;
@@ -59,13 +57,8 @@ public class ChunkManager : MonoBehaviour
 
     private void Update()
     {
-        lastMiddleChunk = loadedChunks[(loadedChunks.Count - 1) / 2];
-
         UpdateChunks();
         octree = new Octree(0, new Box(octreeSize, octreeSize, octreeSize, octreePos));
-
-        currentMiddleChunk = loadedChunks[(loadedChunks.Count - 1) / 2];
-
         UpdateBounds();
     }
 
