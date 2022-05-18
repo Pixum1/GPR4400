@@ -84,8 +84,8 @@ public class Chunk : MonoBehaviour
 
         while(spawnedAmount < _boidAmount && iterations > 0)
         {
-            float circlePos = Random.insideUnitCircle.x * (_chunkSize / 2);
-            Vector3 randomPos = new Vector3(circlePos + _chunkPos.x, seafloor/2, circlePos + _chunkPos.z);
+            Vector2 circlePos = Random.insideUnitCircle * (_chunkSize / 2);
+            Vector3 randomPos = new Vector3(circlePos.x + _chunkPos.x, seafloor/3, circlePos.y + _chunkPos.z);
 
             if (Physics.Raycast(randomPos, Vector3.down, float.MaxValue))
             {
@@ -93,6 +93,44 @@ public class Chunk : MonoBehaviour
                 boid.transform.position = randomPos;
                 spawnedAmount++;
             }
+            iterations--;
+        }
+    }
+
+    public void InitLootCrates(Vector3 _chunkPos, float _chunkSize, int _minCrateAmount, int _maxCrateAmount, GameObject[] _lootCratePrefabs)
+    {
+        GameObject container = new GameObject("LootCrateContainer");
+        container.transform.SetParent(transform);
+
+        GameObject crateToSpawn = _lootCratePrefabs[Random.Range(0, _lootCratePrefabs.Length - 1)];
+
+        int crateAmount = Random.Range(_minCrateAmount, _maxCrateAmount);
+
+        int spawnedAmount = 0;
+        int iterations = 200000;
+
+        while (spawnedAmount < crateAmount && iterations > 0)
+        {
+            Vector2 circlePos = Random.insideUnitCircle * (_chunkSize / 2);
+            Vector3 randomPos = new Vector3(circlePos.x + _chunkPos.x, 100, circlePos.y + _chunkPos.y);
+            Vector3[] points = new Vector3[4]
+            {
+                new Vector3(randomPos.x - crateToSpawn.transform.localScale.x, randomPos.y, randomPos.z + crateToSpawn.transform.localScale.z),
+                new Vector3(randomPos.x + crateToSpawn.transform.localScale.x, randomPos.y, randomPos.z + crateToSpawn.transform.localScale.z),
+                new Vector3(randomPos.x - crateToSpawn.transform.localScale.x, randomPos.y, randomPos.z - crateToSpawn.transform.localScale.z),
+                new Vector3(randomPos.x + crateToSpawn.transform.localScale.x, randomPos.y, randomPos.z - crateToSpawn.transform.localScale.z)
+            };
+
+            if (!Physics.Raycast(points[0], Vector3.down, 99.5f) &&
+                !Physics.Raycast(points[1], Vector3.down, 99.5f) &&
+                !Physics.Raycast(points[2], Vector3.down, 99.5f) &&
+                !Physics.Raycast(points[3], Vector3.down, 99.5f))
+            {
+                GameObject crate = Instantiate(crateToSpawn, container.transform);
+                crate.transform.position = new Vector3(randomPos.x, -.5f, randomPos.z);
+                spawnedAmount++;
+            }
+
             iterations--;
         }
     }

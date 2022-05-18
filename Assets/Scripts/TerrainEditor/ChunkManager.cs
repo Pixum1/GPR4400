@@ -4,10 +4,13 @@ using UnityEngine;
 public class ChunkManager : MonoBehaviour
 {
     [Header("References")]
+    private GameObject m_Player;
     [SerializeField]
-    private Transform m_Player;
+    private GameObject m_PlayerPrefab;
     [SerializeField]
     private GameObject[] m_BoidPrefabs;
+    [SerializeField]
+    private GameObject[] m_CratePrefabs;
 
     [Header("Chunk Settings")]
     [SerializeField]
@@ -16,10 +19,14 @@ public class ChunkManager : MonoBehaviour
     private int m_RenderDistance = 1;
     [SerializeField]
     private int m_BoidsPerChunk;
+    [SerializeField, Min(1)]
+    private int m_MinCrateAmount;
+    [SerializeField, Min(2)]
+    private int m_MaxCrateAmount;
     [SerializeField]
     public TerrainData m_TerrainData;
 
-    public Vector2 PlayerPos => new Vector2(m_Player.position.x, m_Player.position.z);
+    public Vector2 PlayerPos => new Vector2(m_Player.transform.position.x, m_Player.transform.position.z);
     private Dictionary<Vector2Int, Chunk> allChunks;
     private List<Vector2Int> loadedChunks;
 
@@ -46,11 +53,15 @@ public class ChunkManager : MonoBehaviour
 
         if (m_TerrainData.RandomizeSeed)
             m_TerrainData.Seed = Random.Range(1000, 50000).ToString();
+
+        m_Player = Instantiate(m_PlayerPrefab, null);
     }
     private void Start()
     {
         UpdateChunks();
         UpdateBounds();
+
+        PlacePlayer();
 
         octree = new Octree(0, new Box(octreeSize, octreeSize, octreeSize, octreePos));
     }
@@ -60,6 +71,40 @@ public class ChunkManager : MonoBehaviour
         UpdateChunks();
         octree = new Octree(0, new Box(octreeSize, octreeSize, octreeSize, octreePos));
         UpdateBounds();
+    }
+
+    private void PlacePlayer()
+    {
+        BoxCollider col = m_Player.GetComponent<BoxCollider>();
+
+        int iterations = 2000;
+        while (iterations > 0)
+        {
+            Vector2 circlePos = Random.insideUnitCircle * (m_ChunkScale / 2);
+            Vector3 randomPos = new Vector3(circlePos.x, 100, circlePos.y);
+            Vector3[] points = new Vector3[6]
+            {
+                new Vector3(randomPos.x - col.size.x, randomPos.y, randomPos.z + col.size.z),
+                new Vector3(randomPos.x + col.size.x, randomPos.y, randomPos.z + col.size.z),
+                new Vector3(randomPos.x + col.size.x, randomPos.y, randomPos.z),
+                new Vector3(randomPos.x - col.size.x, randomPos.y, randomPos.z),
+                new Vector3(randomPos.x - col.size.x, randomPos.y, randomPos.z - col.size.z),
+                new Vector3(randomPos.x + col.size.x, randomPos.y, randomPos.z - col.size.z)
+            };
+
+            if (!Physics.Raycast(points[0], Vector3.down, 99.5f) &&
+                !Physics.Raycast(points[1], Vector3.down, 99.5f) &&
+                !Physics.Raycast(points[2], Vector3.down, 99.5f) &&
+                !Physics.Raycast(points[3], Vector3.down, 99.5f) &&
+                !Physics.Raycast(points[4], Vector3.down, 99.5f) &&
+                !Physics.Raycast(points[5], Vector3.down, 99.5f))
+            {
+                m_Player.transform.position = new Vector3(randomPos.x, 0, randomPos.z);
+                break;
+            }
+
+            iterations--;
+        }
     }
 
     public void RegenerateChunks()
@@ -103,7 +148,7 @@ public class ChunkManager : MonoBehaviour
 
                     else
                     {
-                        Chunk newChunk = MapGenerator.GenerateChunk(currWorldPos, m_ChunkScale, m_BoidsPerChunk, m_TerrainData, m_BoidPrefabs, this.transform);
+                        Chunk newChunk = MapGenerator.GenerateChunk(currWorldPos, m_ChunkScale, m_BoidsPerChunk, m_MinCrateAmount, m_MaxCrateAmount, m_TerrainData, m_BoidPrefabs, m_CratePrefabs, this.transform);
                         newChunk.Load();
 
                         allChunks.Add(currChunkCoord, newChunk);
@@ -161,9 +206,4 @@ public class ChunkManager : MonoBehaviour
         }
 
     }
-    //private void OnDrawGizmos()
-    //{
-    //    if (octree != null)
-    //        octree.ShowOutlines();
-    //}
 }

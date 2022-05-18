@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SO_BoidSettings 1
   m_EditorClassIdentifier: 
   m_MoveSpeed: 150
-  m_Size: 0.5
+  m_Size: 0.75
   m_AlignmentIntensity: 2.36
   m_CohesionIntensity: 1.5
   m_SeperationIntensity: 2.05

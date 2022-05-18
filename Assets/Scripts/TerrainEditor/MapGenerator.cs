@@ -2,7 +2,7 @@
 
 public static class MapGenerator
 {
-    public static Chunk GenerateChunk(Vector3 _rootPos, float _scale, int _boidAmount, TerrainData _data, GameObject[] _boidPrefabs, Transform _parent)
+    public static Chunk GenerateChunk(Vector3 _rootPos, float _scale, int _boidAmount, int _minCrateAmount, int _maxCrateAmount, TerrainData _data, GameObject[] _boidPrefabs, GameObject[] _lootCratePrefabs, Transform _parent)
     {
         GameObject newChunkObj = new GameObject($"Chunk {_rootPos.x} - {_rootPos.y} - {_rootPos.z}");
         newChunkObj.transform.SetParent(_parent);
@@ -14,7 +14,11 @@ public static class MapGenerator
 
         newChunk.InitGround(_rootPos, terrain, _data.TerrainMaterial);
         newChunk.InitWater(_rootPos, water, _data.WaterMaterial);
-        newChunk.InitBoids(_rootPos, _scale, _boidAmount, _boidPrefabs);
+
+        if(Random.Range(0,1) <= 0.6f)
+            newChunk.InitBoids(_rootPos, _scale, _boidAmount, _boidPrefabs);
+
+        newChunk.InitLootCrates(_rootPos, _scale, _minCrateAmount, _maxCrateAmount, _lootCratePrefabs);
 
         return newChunk;
     }
