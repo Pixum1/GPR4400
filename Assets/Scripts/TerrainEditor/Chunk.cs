@@ -112,7 +112,7 @@ public class Chunk : MonoBehaviour
         while (spawnedAmount < crateAmount && iterations > 0)
         {
             Vector2 circlePos = Random.insideUnitCircle * (_chunkSize / 2);
-            Vector3 randomPos = new Vector3(circlePos.x + _chunkPos.x, 100, circlePos.y + _chunkPos.y);
+            Vector3 randomPos = new Vector3(circlePos.x + _chunkPos.x, 100, circlePos.y + _chunkPos.z);
             Vector3[] points = new Vector3[4]
             {
                 new Vector3(randomPos.x - crateToSpawn.transform.localScale.x, randomPos.y, randomPos.z + crateToSpawn.transform.localScale.z),

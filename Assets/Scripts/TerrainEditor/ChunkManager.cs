@@ -192,7 +192,7 @@ public class ChunkManager : MonoBehaviour
         southCol.center = new Vector3(southSidePos.x + xOffset, 0, southSidePos.y - yOffset);
         westCol.center = new Vector3(southSidePos.x - m_ChunkScale / 2, 0, southSidePos.y + xOffset);
     }
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         if (allChunks != null)
         {
